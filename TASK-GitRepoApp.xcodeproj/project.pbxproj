@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,6 +11,27 @@
 		60170B2925ED13EC00C4EB3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60170B2825ED13EC00C4EB3D /* Assets.xcassets */; };
 		60170B2C25ED13EC00C4EB3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60170B2A25ED13EC00C4EB3D /* LaunchScreen.storyboard */; };
 		60170B3725ED13EC00C4EB3D /* TASK_GitRepoAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60170B3625ED13EC00C4EB3D /* TASK_GitRepoAppTests.swift */; };
+		60170B7125ED175600C4EB3D /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60170B7025ED175600C4EB3D /* SearchViewController.swift */; };
+		60170B7925ED17B600C4EB3D /* RestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60170B7825ED17B600C4EB3D /* RestManager.swift */; };
+		60170B8125ED180A00C4EB3D /* SerializationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60170B8025ED180A00C4EB3D /* SerializationManager.swift */; };
+		60170B8D25ED18F600C4EB3D /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60170B8525ED18F600C4EB3D /* UIImageView+Extensions.swift */; };
+		60170B8E25ED18F600C4EB3D /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60170B8625ED18F600C4EB3D /* UIViewController+Extensions.swift */; };
+		60170B8F25ED18F600C4EB3D /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60170B8725ED18F600C4EB3D /* UIView+Extensions.swift */; };
+		60170B9025ED18F600C4EB3D /* UICollectionViewCell+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60170B8825ED18F600C4EB3D /* UICollectionViewCell+Extensions.swift */; };
+		60170B9225ED18F600C4EB3D /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60170B8A25ED18F600C4EB3D /* UITableView+Extensions.swift */; };
+		60170B9325ED18F600C4EB3D /* UITableViewCell+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60170B8B25ED18F600C4EB3D /* UITableViewCell+Extensions.swift */; };
+		60170B9425ED18F600C4EB3D /* UICollectionView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60170B8C25ED18F600C4EB3D /* UICollectionView+Extensions.swift */; };
+		60170B9A25ED193800C4EB3D /* SpinnerViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60170B9825ED193800C4EB3D /* SpinnerViewManager.swift */; };
+		60170B9B25ED193800C4EB3D /* SpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60170B9925ED193800C4EB3D /* SpinnerView.swift */; };
+		60170BA425ED19FD00C4EB3D /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60170BA025ED19FD00C4EB3D /* ReusableView.swift */; };
+		60170BA525ED19FD00C4EB3D /* CoordinatorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60170BA125ED19FD00C4EB3D /* CoordinatorDelegate.swift */; };
+		60170BA625ED19FD00C4EB3D /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60170BA225ED19FD00C4EB3D /* Coordinator.swift */; };
+		60170BAF25ED1A4700C4EB3D /* SceneOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60170BAE25ED1A4700C4EB3D /* SceneOption.swift */; };
+		60170BB525ED1AF900C4EB3D /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60170BB425ED1AF900C4EB3D /* AppCoordinator.swift */; };
+		60170BB925ED349800C4EB3D /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60170BB825ED349800C4EB3D /* SearchViewModel.swift */; };
+		60170BE725ED481800C4EB3D /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60170BE625ED481800C4EB3D /* FilterViewController.swift */; };
+		6058829725ED75D8005F914C /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6058829625ED75D8005F914C /* FilterViewModel.swift */; };
+		6058829B25ED76C0005F914C /* FilterOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6058829A25ED76C0005F914C /* FilterOption.swift */; };
 		636F0CF23A18AA85EAEA3DE4 /* Pods_TASK_GitRepoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15FF3CF584BBC29B6A6193A7 /* Pods_TASK_GitRepoApp.framework */; };
 		B74CA036FBC11BE2F41F7156 /* Pods_TASK_GitRepoAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D9C73C822FBAC507DC05B02 /* Pods_TASK_GitRepoAppTests.framework */; };
 /* End PBXBuildFile section */
@@ -37,6 +58,27 @@
 		60170B3225ED13EC00C4EB3D /* TASK-GitRepoAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TASK-GitRepoAppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		60170B3625ED13EC00C4EB3D /* TASK_GitRepoAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TASK_GitRepoAppTests.swift; sourceTree = "<group>"; };
 		60170B3825ED13EC00C4EB3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		60170B7025ED175600C4EB3D /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		60170B7825ED17B600C4EB3D /* RestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestManager.swift; sourceTree = "<group>"; };
+		60170B8025ED180A00C4EB3D /* SerializationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerializationManager.swift; sourceTree = "<group>"; };
+		60170B8525ED18F600C4EB3D /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
+		60170B8625ED18F600C4EB3D /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
+		60170B8725ED18F600C4EB3D /* UIView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		60170B8825ED18F600C4EB3D /* UICollectionViewCell+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+Extensions.swift"; sourceTree = "<group>"; };
+		60170B8A25ED18F600C4EB3D /* UITableView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
+		60170B8B25ED18F600C4EB3D /* UITableViewCell+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extensions.swift"; sourceTree = "<group>"; };
+		60170B8C25ED18F600C4EB3D /* UICollectionView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extensions.swift"; sourceTree = "<group>"; };
+		60170B9825ED193800C4EB3D /* SpinnerViewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinnerViewManager.swift; sourceTree = "<group>"; };
+		60170B9925ED193800C4EB3D /* SpinnerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinnerView.swift; sourceTree = "<group>"; };
+		60170BA025ED19FD00C4EB3D /* ReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
+		60170BA125ED19FD00C4EB3D /* CoordinatorDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoordinatorDelegate.swift; sourceTree = "<group>"; };
+		60170BA225ED19FD00C4EB3D /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		60170BAE25ED1A4700C4EB3D /* SceneOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneOption.swift; sourceTree = "<group>"; };
+		60170BB425ED1AF900C4EB3D /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		60170BB825ED349800C4EB3D /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		60170BE625ED481800C4EB3D /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		6058829625ED75D8005F914C /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
+		6058829A25ED76C0005F914C /* FilterOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FilterOption.swift; path = "TASK-GitRepoApp/Common/Models/FilterOption.swift"; sourceTree = SOURCE_ROOT; };
 		6F3F17FD48516C10F2224AD1 /* Pods-TASK-GitRepoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TASK-GitRepoApp.release.xcconfig"; path = "Target Support Files/Pods-TASK-GitRepoApp/Pods-TASK-GitRepoApp.release.xcconfig"; sourceTree = "<group>"; };
 		D7B2AFB1ABBF4F694C8636D4 /* Pods-TASK-GitRepoAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TASK-GitRepoAppTests.release.xcconfig"; path = "Target Support Files/Pods-TASK-GitRepoAppTests/Pods-TASK-GitRepoAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		FDE3C4256319C051CFAE677F /* Pods-TASK-GitRepoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TASK-GitRepoApp.debug.xcconfig"; path = "Target Support Files/Pods-TASK-GitRepoApp/Pods-TASK-GitRepoApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -94,6 +136,8 @@
 		60170B1E25ED13EB00C4EB3D /* TASK-GitRepoApp */ = {
 			isa = PBXGroup;
 			children = (
+				60170B6B25ED170E00C4EB3D /* SearchScene */,
+				60170B7625ED177200C4EB3D /* Common */,
 				60170B5425ED140900C4EB3D /* Support */,
 			);
 			path = "TASK-GitRepoApp";
@@ -115,8 +159,115 @@
 				60170B2825ED13EC00C4EB3D /* Assets.xcassets */,
 				60170B2A25ED13EC00C4EB3D /* LaunchScreen.storyboard */,
 				60170B2D25ED13EC00C4EB3D /* Info.plist */,
+				60170BB425ED1AF900C4EB3D /* AppCoordinator.swift */,
 			);
 			path = Support;
+			sourceTree = "<group>";
+		};
+		60170B6B25ED170E00C4EB3D /* SearchScene */ = {
+			isa = PBXGroup;
+			children = (
+				60170B6F25ED173600C4EB3D /* Coordinator */,
+				60170B6E25ED172C00C4EB3D /* ViewModel */,
+				60170B6D25ED172400C4EB3D /* View */,
+				60170B6C25ED171D00C4EB3D /* Model */,
+			);
+			path = SearchScene;
+			sourceTree = "<group>";
+		};
+		60170B6C25ED171D00C4EB3D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		60170B6D25ED172400C4EB3D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				60170B7025ED175600C4EB3D /* SearchViewController.swift */,
+				60170BE625ED481800C4EB3D /* FilterViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		60170B6E25ED172C00C4EB3D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				60170BB825ED349800C4EB3D /* SearchViewModel.swift */,
+				6058829625ED75D8005F914C /* FilterViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		60170B6F25ED173600C4EB3D /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		60170B7625ED177200C4EB3D /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				60170BAD25ED1A3D00C4EB3D /* Models */,
+				60170BAA25ED1A0600C4EB3D /* Protocols */,
+				60170B9725ED193800C4EB3D /* Spinner */,
+				60170B8425ED18F600C4EB3D /* Extensions */,
+				60170B7725ED17A500C4EB3D /* Networking */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		60170B7725ED17A500C4EB3D /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				60170B7825ED17B600C4EB3D /* RestManager.swift */,
+				60170B8025ED180A00C4EB3D /* SerializationManager.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		60170B8425ED18F600C4EB3D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				60170B8525ED18F600C4EB3D /* UIImageView+Extensions.swift */,
+				60170B8625ED18F600C4EB3D /* UIViewController+Extensions.swift */,
+				60170B8725ED18F600C4EB3D /* UIView+Extensions.swift */,
+				60170B8825ED18F600C4EB3D /* UICollectionViewCell+Extensions.swift */,
+				60170B8A25ED18F600C4EB3D /* UITableView+Extensions.swift */,
+				60170B8B25ED18F600C4EB3D /* UITableViewCell+Extensions.swift */,
+				60170B8C25ED18F600C4EB3D /* UICollectionView+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		60170B9725ED193800C4EB3D /* Spinner */ = {
+			isa = PBXGroup;
+			children = (
+				60170B9825ED193800C4EB3D /* SpinnerViewManager.swift */,
+				60170B9925ED193800C4EB3D /* SpinnerView.swift */,
+			);
+			path = Spinner;
+			sourceTree = "<group>";
+		};
+		60170BAA25ED1A0600C4EB3D /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				60170BA025ED19FD00C4EB3D /* ReusableView.swift */,
+				60170BA225ED19FD00C4EB3D /* Coordinator.swift */,
+				60170BA125ED19FD00C4EB3D /* CoordinatorDelegate.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		60170BAD25ED1A3D00C4EB3D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6058829A25ED76C0005F914C /* FilterOption.swift */,
+				60170BAE25ED1A4700C4EB3D /* SceneOption.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		D778722CB0CA9614B58F1ADF /* Pods */ = {
@@ -127,7 +278,6 @@
 				3D5902CE12D85DC9251536B6 /* Pods-TASK-GitRepoAppTests.debug.xcconfig */,
 				D7B2AFB1ABBF4F694C8636D4 /* Pods-TASK-GitRepoAppTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -315,6 +465,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60170BA625ED19FD00C4EB3D /* Coordinator.swift in Sources */,
+				60170B9025ED18F600C4EB3D /* UICollectionViewCell+Extensions.swift in Sources */,
+				60170B8F25ED18F600C4EB3D /* UIView+Extensions.swift in Sources */,
+				60170B8D25ED18F600C4EB3D /* UIImageView+Extensions.swift in Sources */,
+				60170BB925ED349800C4EB3D /* SearchViewModel.swift in Sources */,
+				60170BAF25ED1A4700C4EB3D /* SceneOption.swift in Sources */,
+				60170B9A25ED193800C4EB3D /* SpinnerViewManager.swift in Sources */,
+				6058829725ED75D8005F914C /* FilterViewModel.swift in Sources */,
+				60170BB525ED1AF900C4EB3D /* AppCoordinator.swift in Sources */,
+				60170B7925ED17B600C4EB3D /* RestManager.swift in Sources */,
+				60170BA425ED19FD00C4EB3D /* ReusableView.swift in Sources */,
+				60170B9B25ED193800C4EB3D /* SpinnerView.swift in Sources */,
+				60170B9225ED18F600C4EB3D /* UITableView+Extensions.swift in Sources */,
+				60170BA525ED19FD00C4EB3D /* CoordinatorDelegate.swift in Sources */,
+				60170B7125ED175600C4EB3D /* SearchViewController.swift in Sources */,
+				60170BE725ED481800C4EB3D /* FilterViewController.swift in Sources */,
+				6058829B25ED76C0005F914C /* FilterOption.swift in Sources */,
+				60170B9325ED18F600C4EB3D /* UITableViewCell+Extensions.swift in Sources */,
+				60170B9425ED18F600C4EB3D /* UICollectionView+Extensions.swift in Sources */,
+				60170B8125ED180A00C4EB3D /* SerializationManager.swift in Sources */,
+				60170B8E25ED18F600C4EB3D /* UIViewController+Extensions.swift in Sources */,
 				60170B2025ED13EB00C4EB3D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
