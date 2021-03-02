@@ -3,6 +3,7 @@ import Alamofire
 import Combine
 
 public class RestManager {
+    
     private static let manager: Alamofire.Session = {
         var configuration = URLSessionConfiguration.default
 //        configuration.timeoutIntervalForRequest = 50

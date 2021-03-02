@@ -52,6 +52,7 @@ class FilterViewController: UIViewController {
     let repositoriesLabel: UILabel = {
         let label = UILabel()
         label.text = "Repositories"
+        label.font = label.font.withSize(20)
         label.isUserInteractionEnabled = true
         return label
     }()
@@ -67,17 +68,17 @@ class FilterViewController: UIViewController {
     let userLabel: UILabel = {
         let label = UILabel()
         label.text = "Users"
+        label.font = label.font.withSize(20)
         label.isUserInteractionEnabled = true
         return label
     }()
     
     let applyButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Apply", for: .normal)
-        button.titleLabel?.font = button.titleLabel?.font.withSize(12)
+        button.setTitle("APPLY", for: .normal)
         button.setTitleColor(.darkGray, for: .disabled)
         button.setTitleColor(.black, for: .normal)
-        button.backgroundColor = .lightGray
+        button.backgroundColor = .white
         button.layer.cornerRadius = 10
         button.layer.borderWidth = 1
         button.layer.borderColor = CGColor.init(red: 1.0, green: 1.0, blue: 1.0, alpha: 1)
@@ -115,8 +116,7 @@ extension FilterViewController {
         repositoriesLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(repositoriesOptionTapped)))
         usersButton.addTarget(self, action: #selector(usersOptionTapped), for: .touchUpInside)
         userLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(usersOptionTapped)))
-        dimmerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(cancelTapped)))
-        
+        applyButton.addTarget(self, action: #selector(applyButtonTapped), for: .touchUpInside)
     }
     
     func initializeSubscribers() {
@@ -124,7 +124,7 @@ extension FilterViewController {
         viewModel.optionSubject
             .subscribe(on: DispatchQueue.global(qos: .background))
             .receive(on: RunLoop.main)
-            .sink { [unowned self] (selectedOptions) in self.updateButtons(with: selectedOptions) }
+            .sink { [unowned self] (selectedOptions) in self.update(with: selectedOptions) }
             .store(in: &disposeBag)
         
         viewModel.enableApplyButtonSubject
@@ -149,7 +149,7 @@ extension FilterViewController {
         }
     }
     
-    func updateButtons(with options: [FilterOption]) {
+    func update(with options: [FilterOption]) {
         repositoriesButton.isSelected = false
         self.repositoriesButton.tintColor = .darkGray
         usersButton.isSelected = false
@@ -157,10 +157,10 @@ extension FilterViewController {
         for item in options {
             switch item {
             case .repositories:
-                self.repositoriesButton.tintColor = .green
+                self.repositoriesButton.tintColor = .init(red: 0.0, green: 0.8, blue: 0.0, alpha: 1.0)
                 self.repositoriesButton.isSelected = true
             case .users:
-                self.usersButton.tintColor = .green
+                self.usersButton.tintColor = .init(red: 0.0, green: 0.8, blue: 0.0, alpha: 1.0)
                 self.usersButton.isSelected = true
             }
         }
@@ -168,7 +168,12 @@ extension FilterViewController {
     
     @objc func repositoriesOptionTapped() { viewModel.optionSelected(.repositories) }
     @objc func usersOptionTapped() { viewModel.optionSelected(.users) }
-    @objc func cancelTapped() { dismiss(animated: false, completion: nil) }
+    @objc func applyButtonTapped() {
+        if applyButton.isEnabled {
+            viewModel.applyTapped()
+            dismiss(animated: false, completion: nil)
+        }
+    }
     
 }
 
@@ -225,7 +230,7 @@ extension FilterViewController {
     func setConstraintsRepositoriesButton() {
         repositoriesButton.snp.makeConstraints { (make) in
             make.width.height.equalTo(20)
-            make.top.equalTo(titleLineSeparator.snp.bottom).offset(15)
+            make.centerY.equalTo(repositoriesLabel.snp.centerY)
             make.leading.equalTo(contentView).offset(15)
         }
     }
@@ -233,16 +238,16 @@ extension FilterViewController {
     func setConstraintsRepositoriesLabel() {
         repositoriesLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(repositoriesButton.snp.trailing).offset(15)
-            make.height.equalTo(20)
-            make.trailing.equalTo(contentView)
-            make.top.equalTo(titleLineSeparator.snp.bottom).offset(15)
+            make.height.equalTo(30)
+            make.trailing.equalTo(contentView).offset(-15)
+            make.top.equalTo(titleLineSeparator.snp.bottom).offset(30)
         }
     }
     
     func setConstraintsUserButton() {
         usersButton.snp.makeConstraints { (make) in
             make.width.height.equalTo(20)
-            make.top.equalTo(repositoriesButton.snp.bottom).offset(15)
+            make.centerY.equalTo(userLabel.snp.centerY)
             make.leading.equalTo(contentView).offset(15)
         }
     }
@@ -250,9 +255,9 @@ extension FilterViewController {
     func setConstraintsUserLabel() {
         userLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(usersButton.snp.trailing).offset(15)
-            make.height.equalTo(20)
-            make.trailing.equalTo(contentView)
-            make.top.equalTo(repositoriesLabel.snp.bottom).offset(15)
+            make.height.equalTo(30)
+            make.trailing.equalTo(contentView).offset(-15)
+            make.top.equalTo(repositoriesLabel.snp.bottom).offset(30)
         }
     }
     
