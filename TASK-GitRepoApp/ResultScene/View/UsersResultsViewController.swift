@@ -9,21 +9,75 @@ import UIKit
 
 class UsersResultsViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    var viewModel: UsersResultViewModel
+    let tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = .gray
+        tableView.register(UsersResultTableViewCell.self,
+                           forCellReuseIdentifier: UsersResultTableViewCell.reuseIdentifier)
+        return tableView
+    }()
+    
+    init(viewModel: UsersResultViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
-    */
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupViews()
+        setConstraintsTableView()
+    }
 
+}
+
+extension UsersResultsViewController {
+    
+    func setupViews() {
+        view.backgroundColor = .gray
+        view.addSubview(tableView)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.reloadData()
+    }
+}
+
+extension UsersResultsViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+       return viewModel.screenData.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: UsersResultTableViewCell = tableView.dequeueReusableCell(for: indexPath)
+        cell.configure(with: viewModel.screenData[indexPath.row])
+        return cell
+    }
+    
+    
+}
+
+extension UsersResultsViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+}
+
+
+extension UsersResultsViewController {
+    //MARK: CONSTRAINTS BELOW
+    
+    
+    func setConstraintsTableView() {
+        tableView.snp.makeConstraints { (make) in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+    }
 }
