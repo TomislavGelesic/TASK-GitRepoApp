@@ -4,6 +4,7 @@ import Combine
 
 class SearchViewModel {
     
+    weak var coordinatorDelegate: CoordinatorDelegate?
     var selectedOptions: [FilterOption] = [.repositories]
     var updateFilterLabelSubject = CurrentValueSubject<Int, Never>(1)
     

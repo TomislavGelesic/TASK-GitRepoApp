@@ -19,33 +19,37 @@ class AppCoordinator: Coordinator {
         window?.makeKeyAndVisible()
         self.navigationController = navigationController
     }
+    
+    deinit {
+        print("AppCoordinator deinit called.")
+    }
 }
 
 extension AppCoordinator {
     
-//    func childDidFinish(_ coordinator: Coordinator, goTo nextScene: SceneOption) {
-//        childCoordinators = childCoordinators.filter({ (coord) -> Bool in
-//            if let _ = coordinator as? HomeSceneCoordinator { return false }
-//            else { return true }
-//        })
-//        switch nextScene {
-//        case .homeScene: break
-//        case .settingsScene(let image): goToSettingsScene(image: image)
-//        }
-//    }
-//
-//    func goToHomeScene(){
-//        let child = HomeSceneCoordinator(navigationController: navigationController)
-//        child.delegate = self
-//        child.start()
-//    }
-//
-//    func goToSettingsScene(image: UIImage) {
-//        let child = SettingsSceneCoordinator(navigationController: navigationController)
-//        child.delegate = self
-//        childCoordinators.append(child)
-//        child.backgroundImage = image
-//        child.start()
-//    }
+    func childDidFinish(_ coordinator: Coordinator, goTo nextScene: SceneOption) {
+        childCoordinators = childCoordinators.filter({ (coord) -> Bool in
+            if let _ = coordinator as? SearchSceneCoordinator { return false }
+            else { return true }
+        })
+        switch nextScene {
+        case .detail: break
+        case .result: break
+        case .search: break
+        }
+    }
+
+    func goToSearchScene(){
+        let child = SearchSceneCoordinator(navigationController: navigationController)
+        child.delegate = self
+        child.start()
+    }
+
+    func goToResultScene() {
+        let child = ResultSceneCoordinator(navigationController: navigationController)
+        child.delegate = self
+        childCoordinators.append(child)
+        child.start()
+    }
 }
 

@@ -13,12 +13,15 @@ class UsersResultTableViewCell: UITableViewCell {
     let avatarImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.tintColor = .green
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
     let contentSubview: UIView = {
         let view = UIView()
         view.backgroundColor = .white
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 5
         return view
     }()
     
@@ -90,7 +93,7 @@ extension UsersResultTableViewCell {
     
     func setConstraintsContentSubview() {
         contentSubview.snp.makeConstraints { (make) in
-            make.edges.equalTo(contentView).inset(UIEdgeInsets(top: 5.0, left: 5.0, bottom: 10.0, right: 5.0))
+            make.edges.equalTo(contentView).inset(UIEdgeInsets(top: 10.0, left: 10.0, bottom: 5.0, right: 10.0))
         }
     }
     

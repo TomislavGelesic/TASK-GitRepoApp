@@ -74,8 +74,8 @@ class RepositoriesResultsTableViewCell: UITableViewCell {
     
     let iconPrivacy: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "lock.fill"), for: .selected)
-        button.setImage(UIImage(systemName: "lock.open.fill"), for: .normal)
+        button.setImage(UIImage(systemName: "lock.circle")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 30)), for: .selected)
+        button.setImage(UIImage(systemName: "lock.circle.fill")?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 30)), for: .normal)
         return button
     }()
     
