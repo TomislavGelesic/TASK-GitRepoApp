@@ -49,7 +49,6 @@ class ResultSceneCoordinator: Coordinator, CoordinatorDelegate {
     }
     
     func viewControllerHasFinished(goTo option: SceneOption) {
-       
         navigationController.popViewController(animated: true)        
         delegate?.childDidFinish(self, next: option)
     }

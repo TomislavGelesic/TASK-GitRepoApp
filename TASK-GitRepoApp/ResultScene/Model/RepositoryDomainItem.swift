@@ -16,9 +16,10 @@ struct RepositoryDomainItem {
     var watchAmount: Int
     var starAmount: Int
     var issueAmount: Int
+    var webPagePath: String
     
     
-    init(repositoryName: String = "", authorName: String = "", description: String = "", isRepositoryPrivate: Bool = false, watchAmount: Int = 0, starAmount: Int = 0, issueAmount: Int = 0) {
+    init(repositoryName: String = "", authorName: String = "", description: String = "", isRepositoryPrivate: Bool = false, watchAmount: Int = 0, starAmount: Int = 0, issueAmount: Int = 0, webPagePath: String = "") {
         self.repositoryName = repositoryName
         self.authorName = authorName
         self.description = description
@@ -26,5 +27,6 @@ struct RepositoryDomainItem {
         self.watchAmount = watchAmount
         self.starAmount = starAmount
         self.issueAmount = issueAmount
+        self.webPagePath = webPagePath
     }
 }

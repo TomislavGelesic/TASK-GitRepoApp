@@ -64,7 +64,6 @@ extension RepositoriesResultsViewController {
             button.tintColor = .black
             return button
         }()
-        #warning("print delete")
         navigationController?.navigationBar.isHidden = false
         searchTextField.delegate = self
         searchTextField.addTarget(self, action: #selector(searchDidChange), for: .allEditingEvents)
@@ -73,9 +72,7 @@ extension RepositoriesResultsViewController {
         navigationController?.navigationBar.tintColor = .init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0)
     }
     
-    @objc func backTapped() {
-        viewModel.backButtonTapped()
-    }
+    @objc func backTapped() { viewModel.backButtonTapped() }
     
     @objc func searchDidChange() {
         if let validText = searchTextField.text,

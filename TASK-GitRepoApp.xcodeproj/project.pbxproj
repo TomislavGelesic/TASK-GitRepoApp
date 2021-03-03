@@ -30,6 +30,10 @@
 		60170BB525ED1AF900C4EB3D /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60170BB425ED1AF900C4EB3D /* AppCoordinator.swift */; };
 		60170BB925ED349800C4EB3D /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60170BB825ED349800C4EB3D /* SearchViewModel.swift */; };
 		60170BE725ED481800C4EB3D /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60170BE625ED481800C4EB3D /* FilterViewController.swift */; };
+		6048F07F25EFEAA90009703A /* DetailsScreenCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6048F07E25EFEAA90009703A /* DetailsScreenCoordinator.swift */; };
+		6048F08825EFEB340009703A /* DetailsScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6048F08725EFEB340009703A /* DetailsScreenViewController.swift */; };
+		6048F08E25EFEB5C0009703A /* DetailsScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6048F08D25EFEB5C0009703A /* DetailsScreenViewModel.swift */; };
+		6048F09225EFF09D0009703A /* DetailsDomainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6048F09125EFF09D0009703A /* DetailsDomainItem.swift */; };
 		6058829725ED75D8005F914C /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6058829625ED75D8005F914C /* FilterViewModel.swift */; };
 		6058829B25ED76C0005F914C /* FilterOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6058829A25ED76C0005F914C /* FilterOption.swift */; };
 		6079CA9D25EE8DB700C2EAC2 /* UserDomainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6079CA9C25EE8DB700C2EAC2 /* UserDomainItem.swift */; };
@@ -93,6 +97,10 @@
 		60170BB425ED1AF900C4EB3D /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		60170BB825ED349800C4EB3D /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		60170BE625ED481800C4EB3D /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		6048F07E25EFEAA90009703A /* DetailsScreenCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsScreenCoordinator.swift; sourceTree = "<group>"; };
+		6048F08725EFEB340009703A /* DetailsScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsScreenViewController.swift; sourceTree = "<group>"; };
+		6048F08D25EFEB5C0009703A /* DetailsScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsScreenViewModel.swift; sourceTree = "<group>"; };
+		6048F09125EFF09D0009703A /* DetailsDomainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsDomainItem.swift; sourceTree = "<group>"; };
 		6058829625ED75D8005F914C /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
 		6058829A25ED76C0005F914C /* FilterOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FilterOption.swift; path = "TASK-GitRepoApp/Common/Models/FilterOption.swift"; sourceTree = SOURCE_ROOT; };
 		6079CA9C25EE8DB700C2EAC2 /* UserDomainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDomainItem.swift; sourceTree = "<group>"; };
@@ -168,6 +176,7 @@
 		60170B1E25ED13EB00C4EB3D /* TASK-GitRepoApp */ = {
 			isa = PBXGroup;
 			children = (
+				6048F07C25EFEA760009703A /* DetailsScreen */,
 				609282D625ED88A700706F68 /* ResultScene */,
 				60170B6B25ED170E00C4EB3D /* SearchScene */,
 				60170B7625ED177200C4EB3D /* Common */,
@@ -306,6 +315,49 @@
 				6079CAB725EED3A400C2EAC2 /* ResultSceneOption.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		6048F07C25EFEA760009703A /* DetailsScreen */ = {
+			isa = PBXGroup;
+			children = (
+				6048F08625EFEB130009703A /* Model */,
+				6048F08525EFEB0C0009703A /* ViewModel */,
+				6048F08425EFEB070009703A /* View */,
+				6048F07D25EFEA830009703A /* Coordinators */,
+			);
+			path = DetailsScreen;
+			sourceTree = "<group>";
+		};
+		6048F07D25EFEA830009703A /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				6048F07E25EFEAA90009703A /* DetailsScreenCoordinator.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		6048F08425EFEB070009703A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6048F08725EFEB340009703A /* DetailsScreenViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6048F08525EFEB0C0009703A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				6048F08D25EFEB5C0009703A /* DetailsScreenViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		6048F08625EFEB130009703A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6048F09125EFF09D0009703A /* DetailsDomainItem.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		6079CAAA25EECE2600C2EAC2 /* Coordinators */ = {
@@ -577,10 +629,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6048F07F25EFEAA90009703A /* DetailsScreenCoordinator.swift in Sources */,
 				6079CAB225EED34E00C2EAC2 /* ResultSceneCoordinator.swift in Sources */,
 				60170BA625ED19FD00C4EB3D /* Coordinator.swift in Sources */,
 				60170B9025ED18F600C4EB3D /* UICollectionViewCell+Extensions.swift in Sources */,
 				60170B8F25ED18F600C4EB3D /* UIView+Extensions.swift in Sources */,
+				6048F09225EFF09D0009703A /* DetailsDomainItem.swift in Sources */,
 				609282E625ED891300706F68 /* RepositoriesResultsViewController.swift in Sources */,
 				6079CAB825EED3A400C2EAC2 /* ResultSceneOption.swift in Sources */,
 				60170B8D25ED18F600C4EB3D /* UIImageView+Extensions.swift in Sources */,
@@ -597,12 +651,14 @@
 				60170BB525ED1AF900C4EB3D /* AppCoordinator.swift in Sources */,
 				6079CABC25EED5E000C2EAC2 /* TabmanAdapter.swift in Sources */,
 				60170B7925ED17B600C4EB3D /* RestManager.swift in Sources */,
+				6048F08E25EFEB5C0009703A /* DetailsScreenViewModel.swift in Sources */,
 				609282EA25EE221300706F68 /* EndPoint.swift in Sources */,
 				60170BA425ED19FD00C4EB3D /* ReusableView.swift in Sources */,
 				60170B9B25ED193800C4EB3D /* SpinnerView.swift in Sources */,
 				6079CAAC25EED0B300C2EAC2 /* SearchSceneCoordinator.swift in Sources */,
 				60170B9225ED18F600C4EB3D /* UITableView+Extensions.swift in Sources */,
 				60170BA525ED19FD00C4EB3D /* CoordinatorDelegate.swift in Sources */,
+				6048F08825EFEB340009703A /* DetailsScreenViewController.swift in Sources */,
 				6079CA9D25EE8DB700C2EAC2 /* UserDomainItem.swift in Sources */,
 				6079CAA125EE8E6D00C2EAC2 /* UsersResultViewModel.swift in Sources */,
 				60170B7125ED175600C4EB3D /* SearchViewController.swift in Sources */,

@@ -19,17 +19,20 @@ class AppCoordinator: Coordinator {
     
     deinit { print("AppCoordinator deinit called.") }
     
-    func start() { goToSearchScene() }
+    func start() {
+        goToDetailScreen(DetailsDomainItem(title: "testing", webPagePath: URLRequest(url: URL(string: "https://www.apple.com")!)))
+    }
+//    func start() { goToSearchScene() }
+    
     
     func childDidFinish(_ coordinator: Coordinator, next: SceneOption) {
         switch next {
-        case .detailScene:
+        case .detailScene(let info):
             childCoordinators = childCoordinators.filter({ (coord) -> Bool in
                 if let _ = coordinator as? SearchSceneCoordinator, coordinator === coord { return true }
-                if let _ = coordinator as? ResultSceneCoordinator, coordinator === coord { return true }
                 else { return false }
             })
-            goToDetailScreen()
+            goToDetailScreen(info)
         case .resultScene(let option):
                 childCoordinators = childCoordinators.filter({ (coord) -> Bool in
                     if let _ = coordinator as? SearchSceneCoordinator, coordinator === coord { return true }
@@ -44,7 +47,6 @@ class AppCoordinator: Coordinator {
         case .browserScene:
             childCoordinators = childCoordinators.filter({ (coord) -> Bool in
                 if let _ = coordinator as? SearchSceneCoordinator, coordinator === coord { return true }
-                if let _ = coordinator as? ResultSceneCoordinator, coordinator === coord { return true }
                 else { return false }
             })
             goToBrowserScene()
@@ -64,8 +66,11 @@ class AppCoordinator: Coordinator {
         child.start(option)
     }
     
-    func goToDetailScreen() {
-        
+    func goToDetailScreen(_ info: DetailsDomainItem) {
+        let child = DetailsScreenCoordinator(navigationController: navigationController)
+        child.delegate = self
+        childCoordinators.append(child)
+        child.start(with: info)
     }
     
     func goToBrowserScene() {

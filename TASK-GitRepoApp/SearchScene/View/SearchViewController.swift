@@ -9,7 +9,8 @@ class SearchViewController: UIViewController {
     var viewModel: SearchViewModel
     
     let logoImage: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "github_logo"))
+        let imageView = UIImageView(image: UIImage(named: "octocat"))
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
@@ -60,6 +61,7 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNavigationTitle("GitHub")
         setupViews()
         setConstraints()
         setSubscribers()
@@ -67,24 +69,22 @@ class SearchViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.isHidden = true
         filterView.iconText.text = "\(viewModel.selectedOptions.count)"
         searchTextField.text = ""
         searchButton.layer.borderColor = CGColor.init(red: 1.0, green: 1.0, blue: 1.0, alpha: 1)
         searchButton.isEnabled = false
         searchButton.backgroundColor = .lightGray
         searchTextField.rightView?.tintColor = .darkGray
-        searchTextField.layer.borderColor = CGColor.init(red: 1/3, green: 1/3, blue: 1/3, alpha: 1)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.navigationBar.isHidden = false
+        searchTextField.layer.borderColor = CGColor.init(red: 0.0, green: 0.0, blue: 0.0, alpha: 1)
     }
 }
 
 extension SearchViewController {
     
+    func setNavigationTitle(_ title: String) {
+        navigationItem.title = title
+        navigationController?.navigationBar.tintColor = .black
+    }
     func setupViews() {
         view.backgroundColor = .white
         view.addSubviews([logoImage, searchTextField, searchButton, filterView])
@@ -110,13 +110,11 @@ extension SearchViewController {
             searchButton.isEnabled = true
             searchButton.backgroundColor = .white
             searchTextField.rightView?.tintColor = .black
-            searchTextField.layer.borderColor = CGColor.init(red: 0.0, green: 0.0, blue: 0.0, alpha: 1)
         } else {
             searchButton.layer.borderColor = CGColor.init(red: 1.0, green: 1.0, blue: 1.0, alpha: 1)
             searchButton.isEnabled = false
             searchButton.backgroundColor = .lightGray
             searchTextField.rightView?.tintColor = .darkGray
-            searchTextField.layer.borderColor = CGColor.init(red: 1/3, green: 1/3, blue: 1/3, alpha: 1)
         }
     }
     
@@ -129,8 +127,6 @@ extension SearchViewController {
     @objc func filterViewTapped() {
         viewModel.filterButtonTapped(on: self)
     }
-    
-    
 }
 
 extension SearchViewController {
@@ -145,8 +141,8 @@ extension SearchViewController {
     
     func setConstaraintsFilterView() {
         filterView.snp.makeConstraints { (make) in
-            make.trailing.equalTo(view).offset(-10)
-            make.top.equalTo(view.snp.top).offset(50)
+            make.trailing.equalTo(view.safeAreaLayoutGuide).offset(-10)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
         }
     }
     
@@ -163,7 +159,7 @@ extension SearchViewController {
             make.width.equalTo(view.frame.width*2/3)
             make.centerX.equalTo(view)
             make.height.equalTo(44)
-            make.bottom.equalTo(searchButton.snp.top).offset(-50)
+            make.bottom.equalTo(searchButton.snp.top).offset(-100)
         }
     }
     
@@ -172,7 +168,7 @@ extension SearchViewController {
             make.width.equalTo(view.frame.width*2/3)
             make.centerX.equalTo(view)
             make.height.equalTo(44)
-            make.bottom.equalTo(view.snp.bottom).offset(-150)
+            make.bottom.equalTo(view.snp.bottom).offset(-100)
         }
     }
 }

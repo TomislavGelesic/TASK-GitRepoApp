@@ -106,7 +106,7 @@ class RepositoriesResultsTableViewCell: UITableViewCell {
 }
 
 extension RepositoriesResultsTableViewCell {
-    
+
     func setupViews() {
         contentView.backgroundColor = .gray
         contentView.addSubview(contentSubview)
