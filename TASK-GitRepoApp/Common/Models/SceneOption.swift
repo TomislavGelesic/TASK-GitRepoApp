@@ -1,7 +1,8 @@
 import Foundation
 
 enum SceneOption {
-    case search
-    case result
-    case detail
+    case searchScene
+    case resultScene(option: ResultSceneOption)
+    case detailScene
+    case browserScene
 }

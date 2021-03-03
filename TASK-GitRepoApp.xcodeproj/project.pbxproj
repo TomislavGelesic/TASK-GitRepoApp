@@ -38,7 +38,7 @@
 		6079CAAC25EED0B300C2EAC2 /* SearchSceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6079CAAB25EED0B300C2EAC2 /* SearchSceneCoordinator.swift */; };
 		6079CAB225EED34E00C2EAC2 /* ResultSceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6079CAB125EED34E00C2EAC2 /* ResultSceneCoordinator.swift */; };
 		6079CAB825EED3A400C2EAC2 /* ResultSceneOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6079CAB725EED3A400C2EAC2 /* ResultSceneOption.swift */; };
-		6079CABC25EED5E000C2EAC2 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6079CABB25EED5E000C2EAC2 /* TabViewController.swift */; };
+		6079CABC25EED5E000C2EAC2 /* TabmanAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6079CABB25EED5E000C2EAC2 /* TabmanAdapter.swift */; };
 		609282E025ED890100706F68 /* UsersResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609282DF25ED890100706F68 /* UsersResultsViewController.swift */; };
 		609282E625ED891300706F68 /* RepositoriesResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609282E525ED891300706F68 /* RepositoriesResultsViewController.swift */; };
 		609282EA25EE221300706F68 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609282E925EE221300706F68 /* EndPoint.swift */; };
@@ -101,7 +101,7 @@
 		6079CAAB25EED0B300C2EAC2 /* SearchSceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSceneCoordinator.swift; sourceTree = "<group>"; };
 		6079CAB125EED34E00C2EAC2 /* ResultSceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSceneCoordinator.swift; sourceTree = "<group>"; };
 		6079CAB725EED3A400C2EAC2 /* ResultSceneOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSceneOption.swift; sourceTree = "<group>"; };
-		6079CABB25EED5E000C2EAC2 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
+		6079CABB25EED5E000C2EAC2 /* TabmanAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabmanAdapter.swift; sourceTree = "<group>"; };
 		609282DF25ED890100706F68 /* UsersResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersResultsViewController.swift; sourceTree = "<group>"; };
 		609282E525ED891300706F68 /* RepositoriesResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesResultsViewController.swift; sourceTree = "<group>"; };
 		609282E925EE221300706F68 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
@@ -333,7 +333,7 @@
 				609282DF25ED890100706F68 /* UsersResultsViewController.swift */,
 				609282E525ED891300706F68 /* RepositoriesResultsViewController.swift */,
 				609282F725EE4CDB00706F68 /* Views */,
-				6079CABB25EED5E000C2EAC2 /* TabViewController.swift */,
+				6079CABB25EED5E000C2EAC2 /* TabmanAdapter.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -595,7 +595,7 @@
 				609282EF25EE359300706F68 /* FilterViewModelDelegate.swift in Sources */,
 				6058829725ED75D8005F914C /* FilterViewModel.swift in Sources */,
 				60170BB525ED1AF900C4EB3D /* AppCoordinator.swift in Sources */,
-				6079CABC25EED5E000C2EAC2 /* TabViewController.swift in Sources */,
+				6079CABC25EED5E000C2EAC2 /* TabmanAdapter.swift in Sources */,
 				60170B7925ED17B600C4EB3D /* RestManager.swift in Sources */,
 				609282EA25EE221300706F68 /* EndPoint.swift in Sources */,
 				60170BA425ED19FD00C4EB3D /* ReusableView.swift in Sources */,

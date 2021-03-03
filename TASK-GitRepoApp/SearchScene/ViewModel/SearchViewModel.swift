@@ -4,12 +4,26 @@ import Combine
 
 class SearchViewModel {
     
-    weak var coordinatorDelegate: CoordinatorDelegate?
+    var coordinatorDelegate: CoordinatorDelegate?
     var selectedOptions: [FilterOption] = [.repositories]
     var updateFilterLabelSubject = CurrentValueSubject<Int, Never>(1)
     
-    func searchButtonTapped(for searchText: String) {
-        let endpoint = Endpoint.searchRepositories(matching: searchText)
+    deinit {
+        print("SearchViewModel deinit called.")
+    }
+    
+    func searchButtonTapped(for searchQuery: String) {
+        #warning("check this endpoint")
+//        let endpoint = Endpoint.searchRepositories(matching: searchQuery)
+        if selectedOptions.contains(.repositories), selectedOptions.contains(.users) {
+            coordinatorDelegate?.viewControllerHasFinished(goTo: .resultScene(option: .usersAndRepositories(search: searchQuery)))
+        }
+        else if selectedOptions.contains(.repositories) {
+            coordinatorDelegate?.viewControllerHasFinished(goTo: .resultScene(option: .repositories(search: searchQuery)))
+        }
+        else {
+            coordinatorDelegate?.viewControllerHasFinished(goTo: .resultScene(option: .users(search: searchQuery)))
+        }
     }
     
     func filterButtonTapped(on vc: SearchViewController?) {

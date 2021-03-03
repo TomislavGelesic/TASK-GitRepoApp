@@ -17,28 +17,41 @@ class ResultSceneCoordinator: Coordinator, CoordinatorDelegate {
         self.navigationController = navigationController
     }
     
+    deinit { print("ResultSceneCoordinator deinit called") }
     
     func start() { }
     
     func start(_ option: ResultSceneOption) {
         
-        var viewController: UIViewController?
+        var nextController: UIViewController?
         switch option {
         case .repositories(search: let searchText):
-            let viewModel = RepositoriesResultViewModel()
-            viewController = RepositoriesResultsViewController(viewModel: viewModel)
+            let vm = RepositoriesResultViewModel()
+            vm.coordinatorDelegate = self
+            let vc = RepositoriesResultsViewController(viewModel: vm)
+            nextController = vc
         case .users(search: let searchText):
-            let viewModel = UsersResultViewModel()
-            viewController = UsersResultsViewController(viewModel: viewModel)
+            let vm = UsersResultViewModel()
+            vm.coordinatorDelegate = self
+            let vc = UsersResultsViewController(viewModel: vm)
+            nextController = vc
         case .usersAndRepositories(search: let searchText):
-            break
+            let userVM = UsersResultViewModel()
+            userVM.coordinatorDelegate = self
+            let userVC = UsersResultsViewController(viewModel: userVM)
+            let repoVM = RepositoriesResultViewModel()
+            repoVM.coordinatorDelegate = self
+            let repoVC = RepositoriesResultsViewController(viewModel: repoVM)
+            nextController = TabmanAdapter(viewControllers: [repoVC, userVC])
         }
-        guard let vc = viewController else { return }
-        navigationController.pushViewController(vc, animated: true)
+        guard let controllersOK = nextController else { return }
+        navigationController.pushViewController(controllersOK, animated: true)
     }
     
     func viewControllerHasFinished(goTo option: SceneOption) {
-        
+       
+        navigationController.popViewController(animated: true)        
+        delegate?.childDidFinish(self, next: option)
     }
     
 

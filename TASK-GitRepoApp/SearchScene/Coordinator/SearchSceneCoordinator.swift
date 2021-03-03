@@ -29,14 +29,7 @@ class SearchSceneCoordinator: Coordinator, CoordinatorDelegate {
     }
     
     func viewControllerHasFinished(goTo option: SceneOption) {
-        switch option {
-        case .detail:
-            break
-        case .result:
-            break
-        case .search:
-            break
-        }
+        delegate?.childDidFinish(self, next: option)
     }
     
 

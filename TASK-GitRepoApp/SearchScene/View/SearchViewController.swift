@@ -14,18 +14,18 @@ class SearchViewController: UIViewController {
     }()
     
     let searchTextField: UITextField = {
-        let img = UIImage(systemName: "magnifyingglass", withConfiguration: UIImage.SymbolConfiguration(pointSize: 30.0))
+        let img = UIImage(systemName: "magnifyingglass", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20.0))
         let iconView = UIImageView(image: img?.withRenderingMode(.alwaysTemplate))
-        iconView.tintColor = .darkGray
-        let leftPlaceholderView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 10.0, height: 10.0))
+        iconView.tintColor = .lightGray
+        let placeholderView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 10.0, height: 10.0))
         let textField = UITextField()
-        textField.leftView = leftPlaceholderView
-        textField.leftViewMode = .always
-        textField.rightView = iconView
+        textField.rightView = placeholderView
         textField.rightViewMode = .always
+        textField.leftView = iconView
+        textField.leftViewMode = .always
         textField.placeholder = "Search"
         textField.layer.borderWidth = 1
-        textField.layer.borderColor = CGColor.init(red: 1/3, green: 1/3, blue: 1/3, alpha: 1)
+        textField.layer.borderColor = CGColor.init(red: 0.0, green: 0.0, blue: 0.0, alpha: 1)
         return textField
     }()
     
@@ -60,8 +60,6 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupNavigationBar()
         setupViews()
         setConstraints()
         setSubscribers()
@@ -69,16 +67,23 @@ class SearchViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        navigationController?.navigationBar.isHidden = true
         filterView.iconText.text = "\(viewModel.selectedOptions.count)"
+        searchTextField.text = ""
+        searchButton.layer.borderColor = CGColor.init(red: 1.0, green: 1.0, blue: 1.0, alpha: 1)
+        searchButton.isEnabled = false
+        searchButton.backgroundColor = .lightGray
+        searchTextField.rightView?.tintColor = .darkGray
+        searchTextField.layer.borderColor = CGColor.init(red: 1/3, green: 1/3, blue: 1/3, alpha: 1)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.isHidden = false
     }
 }
 
 extension SearchViewController {
-    
-    func setupNavigationBar() {
-        navigationController?.navigationBar.isHidden = true
-    }
     
     func setupViews() {
         view.backgroundColor = .white
@@ -116,10 +121,9 @@ extension SearchViewController {
     }
     
     @objc func searchButtonTapped() {
-        if let text = searchTextField.text,
-           !text.isEmpty {
+        if let text = searchTextField.text {
             viewModel.searchButtonTapped(for: text)
-        }
+        }        
     }
     
     @objc func filterViewTapped() {

@@ -63,7 +63,7 @@ class UsersResultTableViewCell: UITableViewCell {
 extension UsersResultTableViewCell {
     
     func setupViews() {
-        contentView.backgroundColor = .darkGray
+        contentView.backgroundColor = .gray
         contentView.addSubview(contentSubview)
         contentSubview.addSubviews([
             authorNameLabel,

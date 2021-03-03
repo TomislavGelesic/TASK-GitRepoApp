@@ -7,9 +7,6 @@ class AppCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     
-    func start() {
-        navigationController.pushViewController(SearchViewController(viewModel: SearchViewModel()), animated: true)
-    }
     
     init() {
         window = UIWindow()
@@ -20,22 +17,37 @@ class AppCoordinator: Coordinator {
         self.navigationController = navigationController
     }
     
-    deinit {
-        print("AppCoordinator deinit called.")
-    }
-}
-
-extension AppCoordinator {
+    deinit { print("AppCoordinator deinit called.") }
     
-    func childDidFinish(_ coordinator: Coordinator, goTo nextScene: SceneOption) {
-        childCoordinators = childCoordinators.filter({ (coord) -> Bool in
-            if let _ = coordinator as? SearchSceneCoordinator { return false }
-            else { return true }
-        })
-        switch nextScene {
-        case .detail: break
-        case .result: break
-        case .search: break
+    func start() { goToSearchScene() }
+    
+    func childDidFinish(_ coordinator: Coordinator, next: SceneOption) {
+        switch next {
+        case .detailScene:
+            childCoordinators = childCoordinators.filter({ (coord) -> Bool in
+                if let _ = coordinator as? SearchSceneCoordinator, coordinator === coord { return true }
+                if let _ = coordinator as? ResultSceneCoordinator, coordinator === coord { return true }
+                else { return false }
+            })
+            goToDetailScreen()
+        case .resultScene(let option):
+                childCoordinators = childCoordinators.filter({ (coord) -> Bool in
+                    if let _ = coordinator as? SearchSceneCoordinator, coordinator === coord { return true }
+                    else { return false }
+                })
+            goToResultScene(option)
+        case .searchScene:
+            childCoordinators = childCoordinators.filter({ (coord) -> Bool in
+                if let _ = coordinator as? SearchSceneCoordinator, coordinator === coord  { return true }
+                else { return false }
+            })
+        case .browserScene:
+            childCoordinators = childCoordinators.filter({ (coord) -> Bool in
+                if let _ = coordinator as? SearchSceneCoordinator, coordinator === coord { return true }
+                if let _ = coordinator as? ResultSceneCoordinator, coordinator === coord { return true }
+                else { return false }
+            })
+            goToBrowserScene()
         }
     }
 
@@ -45,11 +57,19 @@ extension AppCoordinator {
         child.start()
     }
 
-    func goToResultScene() {
+    func goToResultScene(_ option: ResultSceneOption) {
         let child = ResultSceneCoordinator(navigationController: navigationController)
         child.delegate = self
         childCoordinators.append(child)
-        child.start()
+        child.start(option)
+    }
+    
+    func goToDetailScreen() {
+        
+    }
+    
+    func goToBrowserScene() {
+        
     }
 }
 

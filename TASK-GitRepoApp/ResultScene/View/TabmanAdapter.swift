@@ -9,28 +9,23 @@ import UIKit
 import Tabman
 import Pageboy
 
-class TabViewController: TabmanViewController {
+class TabmanAdapter: TabmanViewController {
     
     var viewControllers: [UIViewController]
     
-    
     init(viewControllers: [UIViewController]) {
-        self.viewControllers = viewControllers
+        self.viewControllers = viewControllers.map({ (vc) -> UINavigationController in
+            return UINavigationController(rootViewController: vc)
+        })
         super.init(nibName: nil, bundle: nil)
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
-    deinit {
-        print("TabViewController deinit called.")
-    }
-    
+    deinit { print("TabmanAdapter deinit called.") }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.dataSource = self
         let bar = TMBar.ButtonBar()
         bar.layout.transitionStyle = .snap
@@ -42,22 +37,33 @@ class TabViewController: TabmanViewController {
         bar.indicator.tintColor = .init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0)
         addBar(bar, dataSource: self, at: .bottom)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        dismiss(animated: true, completion: nil)
+        navigationController?.navigationBar.isHidden = false
+    }
 }
 
-extension TabViewController: PageboyViewControllerDataSource, TMBarDataSource {
+extension TabmanAdapter: PageboyViewControllerDataSource, TMBarDataSource {
     func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
         return viewControllers.count
     }
-
     func viewController(for pageboyViewController: PageboyViewController,
                         at index: PageboyViewController.PageIndex) -> UIViewController? {
+        if pageboyViewController is RepositoriesResultsViewController {
+            
+        }
         return viewControllers[index]
     }
-
     func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
         return nil
     }
-
     func barItem(for bar: TMBar, at index: Int) -> TMBarItemable {
         switch index {
         case 0:
