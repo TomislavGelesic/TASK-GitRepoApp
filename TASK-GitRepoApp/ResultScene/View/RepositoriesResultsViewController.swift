@@ -7,12 +7,12 @@ class RepositoriesResultsViewController: UIViewController {
     var disposeBag = Set<AnyCancellable>()
     var viewModel: RepositoriesResultViewModel
     let tableView: UITableView = {
-        let backgroundView = UILabel()
-        backgroundView.text = "No result.."
-        backgroundView.textColor = .white
-        backgroundView.textAlignment = .center
+        let label = UILabel()
+        label.textAlignment = .center
+        label.text = "Search match not found.."
+        label.textColor = .white
         let tableView = UITableView()
-        tableView.backgroundView = backgroundView
+        tableView.backgroundView = label
         tableView.separatorStyle = .none
         tableView.backgroundColor = .gray
         tableView.register(RepositoriesResultsTableViewCell.self,
@@ -31,8 +31,10 @@ class RepositoriesResultsViewController: UIViewController {
         textField.leftView = iconView
         textField.leftViewMode = .always
         textField.placeholder = "Search"
+        textField.layer.masksToBounds = true
         textField.layer.borderWidth = 1
         textField.layer.borderColor = CGColor.init(red: 0.0, green: 0.0, blue: 0.0, alpha: 1)
+        textField.layer.cornerRadius = 5
         return textField
     }()
     
@@ -49,8 +51,10 @@ class RepositoriesResultsViewController: UIViewController {
         setupViews()
         setConstraintsTableView()
         setupSubscribers()
+        showSpinner()
         viewModel.searchSubject.send(viewModel.searchQuery)
     }
+    
 }
 
 extension RepositoriesResultsViewController {
@@ -79,6 +83,7 @@ extension RepositoriesResultsViewController {
                 viewModel.updateUISubject.send()
             }
             else if validText.count >= 2 {
+                showSpinner()
                 viewModel.shouldGetFilteredScreenData = true
                 viewModel.showFilteredScreenData(query: validText)
             }
@@ -90,14 +95,16 @@ extension RepositoriesResultsViewController {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.reloadData()
     }
     
     func setupSubscribers() {
         viewModel.updateUISubject
             .subscribe(on: DispatchQueue.global(qos: .background))
             .receive(on: RunLoop.main)
-            .sink { [unowned self] (_) in self.tableView.reloadData() }
+            .sink { [unowned self] (value) in
+                self.tableView.reloadData()
+                self.hideSpinner()
+            }
             .store(in: &disposeBag)
         
         viewModel.initializeSearchSubject(subject: viewModel.searchSubject.eraseToAnyPublisher())

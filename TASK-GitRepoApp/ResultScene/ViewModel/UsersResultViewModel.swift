@@ -13,7 +13,7 @@ class UsersResultViewModel {
     var repository: UserResultRepositoryImpl
     let spinnerSubject = PassthroughSubject<Bool, Never>()
     let alertSubject = PassthroughSubject<String, Never>()
-    let searchSubject = CurrentValueSubject<String, Never>("")
+    let searchSubject = PassthroughSubject<String, Never>()
     let updateUISubject = PassthroughSubject<Void, Never>()
     
     init(query: String, repository: UserResultRepositoryImpl) {
@@ -24,14 +24,13 @@ class UsersResultViewModel {
     
     func showFilteredScreenData(query: String) {
         filteredScreenData = screenData.filter { $0.authorName.contains(query) ? true : false }
-        updateUISubject.send()
+        self.updateUISubject.send()
     }
     
     func initializeSearchSubject(subject: AnyPublisher<String, Never>) -> AnyCancellable {
         
         return subject
-            .flatMap({ [unowned self] (query) -> AnyPublisher<Result<UserResponse, AFError>, Never> in
-                self.spinnerSubject.send(true)
+            .flatMap({ [unowned self] (query) -> AnyPublisher<Result<UserResponse, RestManagerError>, Never> in
                 return repository.fetch(matching: query)
             })
             .subscribe(on: DispatchQueue.global(qos: .background))
@@ -41,7 +40,6 @@ class UsersResultViewModel {
                 case .success(let response):
                     self.screenData = response.items.map{ UserDomainItem($0)}
                     self.updateUISubject.send()
-                    self.spinnerSubject.send(false)
                 case .failure(let error):
                     print(error)
                     self.spinnerSubject.send(false)
@@ -61,9 +59,9 @@ class UsersResultViewModel {
         }
     }
     
-    func openUrlInBrowser(_ urlString: String) {
-        if let url = URL(string: urlString),
+    func openUrlInBrowser(_ userWebPagePath: String) {
+        if let url = URL(string: "\(userWebPagePath)?tab=repositories"),
            UIApplication.shared.canOpenURL(url) { UIApplication.shared.open(url, options: [:], completionHandler: nil) }
-        else { print("Couldn't open URL: '' \(urlString) '' in browser") }
+        else { print("Couldn't open URL: '' \(userWebPagePath)?tab=repositories '' in browser") }
     }
 }

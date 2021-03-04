@@ -43,6 +43,7 @@
 		6048F0DA25F0E4AC0009703A /* ResultRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6048F0D925F0E4AC0009703A /* ResultRepository.swift */; };
 		6048F0FC25F0F5280009703A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6048F0FB25F0F5280009703A /* Constants.swift */; };
 		6048F10025F0F7960009703A /* UserResultRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6048F0FF25F0F7960009703A /* UserResultRepositoryImpl.swift */; };
+		6048F11E25F14C9A0009703A /* RestManagerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6048F11D25F14C9A0009703A /* RestManagerError.swift */; };
 		6058829725ED75D8005F914C /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6058829625ED75D8005F914C /* FilterViewModel.swift */; };
 		6058829B25ED76C0005F914C /* FilterOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6058829A25ED76C0005F914C /* FilterOption.swift */; };
 		6079CA9D25EE8DB700C2EAC2 /* UserDomainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6079CA9C25EE8DB700C2EAC2 /* UserDomainItem.swift */; };
@@ -54,7 +55,6 @@
 		6079CABC25EED5E000C2EAC2 /* TabmanAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6079CABB25EED5E000C2EAC2 /* TabmanAdapter.swift */; };
 		609282E025ED890100706F68 /* UsersResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609282DF25ED890100706F68 /* UsersResultsViewController.swift */; };
 		609282E625ED891300706F68 /* RepositoriesResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609282E525ED891300706F68 /* RepositoriesResultsViewController.swift */; };
-		609282EA25EE221300706F68 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609282E925EE221300706F68 /* EndPoint.swift */; };
 		609282EF25EE359300706F68 /* FilterViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609282EE25EE359300706F68 /* FilterViewModelDelegate.swift */; };
 		609282F425EE41F500706F68 /* IconViewWithText1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609282F325EE41F500706F68 /* IconViewWithText1.swift */; };
 		609282F925EE4CFD00706F68 /* RepositoriesResultsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609282F825EE4CFD00706F68 /* RepositoriesResultsTableViewCell.swift */; };
@@ -119,6 +119,7 @@
 		6048F0D925F0E4AC0009703A /* ResultRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ResultRepository.swift; path = "TASK-GitRepoApp/ResultScene/Protocols/ResultRepository.swift"; sourceTree = SOURCE_ROOT; };
 		6048F0FB25F0F5280009703A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		6048F0FF25F0F7960009703A /* UserResultRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResultRepositoryImpl.swift; sourceTree = "<group>"; };
+		6048F11D25F14C9A0009703A /* RestManagerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestManagerError.swift; sourceTree = "<group>"; };
 		6058829625ED75D8005F914C /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
 		6058829A25ED76C0005F914C /* FilterOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FilterOption.swift; path = "TASK-GitRepoApp/Common/Models/FilterOption.swift"; sourceTree = SOURCE_ROOT; };
 		6079CA9C25EE8DB700C2EAC2 /* UserDomainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDomainItem.swift; sourceTree = "<group>"; };
@@ -130,7 +131,6 @@
 		6079CABB25EED5E000C2EAC2 /* TabmanAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabmanAdapter.swift; sourceTree = "<group>"; };
 		609282DF25ED890100706F68 /* UsersResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersResultsViewController.swift; sourceTree = "<group>"; };
 		609282E525ED891300706F68 /* RepositoriesResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesResultsViewController.swift; sourceTree = "<group>"; };
-		609282E925EE221300706F68 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		609282EE25EE359300706F68 /* FilterViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModelDelegate.swift; sourceTree = "<group>"; };
 		609282F325EE41F500706F68 /* IconViewWithText1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconViewWithText1.swift; sourceTree = "<group>"; };
 		609282F825EE4CFD00706F68 /* RepositoriesResultsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesResultsTableViewCell.swift; sourceTree = "<group>"; };
@@ -274,12 +274,12 @@
 		60170B7625ED177200C4EB3D /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				6048F0FB25F0F5280009703A /* Constants.swift */,
 				60170BAD25ED1A3D00C4EB3D /* Models */,
 				60170BAA25ED1A0600C4EB3D /* Protocols */,
 				60170B9725ED193800C4EB3D /* Spinner */,
 				60170B8425ED18F600C4EB3D /* Extensions */,
 				60170B7725ED17A500C4EB3D /* Networking */,
-				6048F0FB25F0F5280009703A /* Constants.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -289,7 +289,7 @@
 			children = (
 				60170B7825ED17B600C4EB3D /* RestManager.swift */,
 				60170B8025ED180A00C4EB3D /* SerializationManager.swift */,
-				609282E925EE221300706F68 /* EndPoint.swift */,
+				6048F11D25F14C9A0009703A /* RestManagerError.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -697,7 +697,6 @@
 				60170B7925ED17B600C4EB3D /* RestManager.swift in Sources */,
 				6048F0FC25F0F5280009703A /* Constants.swift in Sources */,
 				6048F08E25EFEB5C0009703A /* DetailsScreenViewModel.swift in Sources */,
-				609282EA25EE221300706F68 /* EndPoint.swift in Sources */,
 				60170BA425ED19FD00C4EB3D /* ReusableView.swift in Sources */,
 				6048F0C725F0DF010009703A /* RepositoriesResultRepositoryImpl.swift in Sources */,
 				60170B9B25ED193800C4EB3D /* SpinnerView.swift in Sources */,
@@ -712,6 +711,7 @@
 				6048F10025F0F7960009703A /* UserResultRepositoryImpl.swift in Sources */,
 				60170B7125ED175600C4EB3D /* SearchViewController.swift in Sources */,
 				60170BE725ED481800C4EB3D /* FilterViewController.swift in Sources */,
+				6048F11E25F14C9A0009703A /* RestManagerError.swift in Sources */,
 				6058829B25ED76C0005F914C /* FilterOption.swift in Sources */,
 				60170B9325ED18F600C4EB3D /* UITableViewCell+Extensions.swift in Sources */,
 				60170B9425ED18F600C4EB3D /* UICollectionView+Extensions.swift in Sources */,

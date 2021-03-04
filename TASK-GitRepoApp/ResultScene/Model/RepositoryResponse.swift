@@ -8,10 +8,10 @@ import Foundation
 struct RepositoryResponse: Codable {
     var items: [RepositoryResponseItem]
 }
-#warning("fork icon with text missing in UI vc")
+
 struct RepositoryResponseItem: Codable {
     var name: String
-    var itemPrivate: Bool
+    var isPrivate: Bool
     var owner: Owner
     var htmlUrl: String
     var itemDescription: String?
@@ -22,7 +22,7 @@ struct RepositoryResponseItem: Codable {
 
     enum CodingKeys: String, CodingKey {
         case name
-        case itemPrivate = "private"
+        case isPrivate = "private"
         case owner
         case htmlUrl = "html_url"
         case itemDescription = "description"

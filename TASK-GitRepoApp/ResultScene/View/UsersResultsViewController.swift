@@ -7,16 +7,15 @@ class UsersResultsViewController: UIViewController {
     var disposeBag = Set<AnyCancellable>()
     var viewModel: UsersResultViewModel
     let tableView: UITableView = {
-        let backgroundView = UILabel()
-        backgroundView.text = "No result.."
-        backgroundView.textColor = .white
-        backgroundView.textAlignment = .center
+        let label = UILabel()
+        label.textAlignment = .center
+        label.text = "Search match not found.."
+        label.textColor = .white
         let tableView = UITableView()
-        tableView.backgroundView = backgroundView
+        tableView.backgroundView = label
         tableView.separatorStyle = .none
         tableView.backgroundColor = .gray
-        tableView.register(UsersResultTableViewCell.self,
-                           forCellReuseIdentifier: UsersResultTableViewCell.reuseIdentifier)
+        tableView.register(UsersResultTableViewCell.self, forCellReuseIdentifier: UsersResultTableViewCell.reuseIdentifier)
         return tableView
     }()
     
@@ -31,8 +30,10 @@ class UsersResultsViewController: UIViewController {
         textField.leftView = iconView
         textField.leftViewMode = .always
         textField.placeholder = "Search"
+        textField.layer.masksToBounds = true
         textField.layer.borderWidth = 1
         textField.layer.borderColor = CGColor.init(red: 0.0, green: 0.0, blue: 0.0, alpha: 1)
+        textField.layer.cornerRadius = 5
         return textField
     }()
     
@@ -49,6 +50,7 @@ class UsersResultsViewController: UIViewController {
         setupViews()
         setConstraintsTableView()
         setupSubscribers()
+        showSpinner()
         viewModel.searchSubject.send(viewModel.searchQuery)
     }
 
@@ -58,11 +60,11 @@ extension UsersResultsViewController {
     
     func setupNavigationBar() {
         let backButton: UIBarButtonItem = {
-        let buttonImage = UIImage(systemName: "arrow.left")
-        let button = UIBarButtonItem(image: buttonImage, style: .plain, target: self, action: #selector(backTapped))
-        button.tintColor = .black
-        return button
-    }()
+            let buttonImage = UIImage(systemName: "arrow.left")
+            let button = UIBarButtonItem(image: buttonImage, style: .plain, target: self, action: #selector(backTapped))
+            button.tintColor = .black
+            return button
+        }()
         navigationController?.navigationBar.isHidden = false
         searchTextField.delegate = self
         searchTextField.addTarget(self, action: #selector(searchDidChange), for: .allEditingEvents)
@@ -80,6 +82,7 @@ extension UsersResultsViewController {
                 viewModel.updateUISubject.send()
             }
             else if validText.count >= 2 {
+                showSpinner()
                 viewModel.shouldGetFilteredScreenData = true
                 viewModel.showFilteredScreenData(query: validText)
             }
@@ -100,23 +103,24 @@ extension UsersResultsViewController {
             .receive(on: RunLoop.main)
             .sink { [unowned self] (_) in
                 self.tableView.reloadData()
+                self.hideSpinner()
             }
             .store(in: &disposeBag)       
-    
-    viewModel.initializeSearchSubject(subject: viewModel.searchSubject.eraseToAnyPublisher())
-        .store(in: &disposeBag)
-    
-    viewModel.spinnerSubject
-        .subscribe(on: DispatchQueue.global(qos: .background))
-        .receive(on: RunLoop.main)
-        .sink { [unowned self] (value) in value ? self.showSpinner() : self.hideSpinner() }
-        .store(in: &disposeBag)
-    
-    viewModel.alertSubject
-        .subscribe(on: DispatchQueue.global(qos: .background))
-        .receive(on: RunLoop.main)
-        .sink { [unowned self] (message) in self.showAlert(text: message) { } }
-        .store(in: &disposeBag)
+        
+        viewModel.initializeSearchSubject(subject: viewModel.searchSubject.eraseToAnyPublisher())
+            .store(in: &disposeBag)
+        
+        viewModel.spinnerSubject
+            .subscribe(on: DispatchQueue.global(qos: .background))
+            .receive(on: RunLoop.main)
+            .sink { [unowned self] (value) in value ? self.showSpinner() : self.hideSpinner() }
+            .store(in: &disposeBag)
+        
+        viewModel.alertSubject
+            .subscribe(on: DispatchQueue.global(qos: .background))
+            .receive(on: RunLoop.main)
+            .sink { [unowned self] (message) in self.showAlert(text: message) { } }
+            .store(in: &disposeBag)
     }
 }
 

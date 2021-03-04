@@ -13,8 +13,6 @@ class SearchViewModel {
     }
     
     func searchButtonTapped(for searchQuery: String) {
-        #warning("check this endpoint")
-//        let endpoint = Endpoint.searchRepositories(matching: searchQuery)
         if selectedOptions.contains(.repositories), selectedOptions.contains(.users) {
             coordinatorDelegate?.viewControllerHasFinished(goTo: .resultScene(option: .usersAndRepositories(search: searchQuery)))
         }

@@ -14,6 +14,7 @@ class IconViewWithText2: UIView {
         let button = UIButton()
         button.setImage(UIImage(systemName: "slider.horizontal.3")?.withRenderingMode(.alwaysTemplate), for: .normal)
         button.tintColor = .black
+        button.imageView?.contentMode = .scaleAspectFit
         button.setPreferredSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 30.0), forImageIn: .normal)
         return button
     }()
@@ -47,7 +48,8 @@ class IconViewWithText2: UIView {
         iconText.snp.makeConstraints { (make) in
             make.top.equalTo(icon.snp.bottom).offset(2)
             make.centerX.equalTo(self)
-            make.width.equalTo(icon)
+            if iconSize < 40 { make.width.equalTo(40) }
+            else { make.width.equalTo(iconSize) }
             make.height.equalTo(15)
             make.bottom.equalTo(self)
         }
