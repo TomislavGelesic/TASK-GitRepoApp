@@ -4,7 +4,8 @@ import SnapKit
 
 class RepositoriesResultsTableViewCell: UITableViewCell {
     
-    var buttonTapped: (()->())?
+    var openInBrowserTapped: (()->())?
+    var authorDetailsTapped: (()->())?
     
     let contentSubview: UIView = {
         let view = UIView()
@@ -119,14 +120,16 @@ extension RepositoriesResultsTableViewCell {
             iconContainer,
             lineSeparator
         ])
-        
         iconContainer.addSubviews([
             iconPrivacy,
             iconIssue,
             iconWatch,
             iconStar
         ])
+        authorDetailsButton.addTarget(self, action: #selector(authorDetailsButtonTapped), for: .touchUpInside)
     }
+    
+    @objc func authorDetailsButtonTapped() { authorDetailsTapped?() }
     
     func configure(with data: RepositoryDomainItem) {
         
@@ -140,7 +143,9 @@ extension RepositoriesResultsTableViewCell {
             iconPrivacy.isSelected = false
             iconPrivacy.tintColor = .green
         }
-        
+        print(data.issueAmount)
+        print(data.starAmount)
+        print(data.watchAmount)
         iconIssue.iconText.text = "\(data.issueAmount)"
         iconWatch.iconText.text = "\(data.watchAmount)"
         iconStar.iconText.text = "\(data.starAmount)"

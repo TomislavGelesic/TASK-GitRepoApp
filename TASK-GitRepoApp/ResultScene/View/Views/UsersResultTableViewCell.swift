@@ -4,6 +4,9 @@ import Kingfisher
 
 class UsersResultTableViewCell: UITableViewCell {
     
+    var openProfileTapped: (()->())?
+    var openInBrowserTapped: (()->())?
+    
     let authorNameLabel: UILabel = {
         let label = UILabel()
         label.font = label.font.withSize(24)
@@ -71,11 +74,14 @@ extension UsersResultTableViewCell {
             openProfileButton,
             openRepositoriesButton
         ])
+        openRepositoriesButton.addTarget(self, action: #selector(openRepositoriesButtonTapped), for: .touchUpInside)
+        openProfileButton.addTarget(self, action: #selector(openProfileButtonTapped), for: .touchUpInside)
     }
-    
+    @objc func openRepositoriesButtonTapped() { openInBrowserTapped?() }
+    @objc func openProfileButtonTapped() { openProfileTapped?() }
     func configure(with data: UserDomainItem) {
         authorNameLabel.text = data.authorName
-        avatarImageView.image = UIImage(systemName: "photo")?.withRenderingMode(.alwaysTemplate)
+        avatarImageView.setImage(with: data.avatarPath)
     }
 }
 

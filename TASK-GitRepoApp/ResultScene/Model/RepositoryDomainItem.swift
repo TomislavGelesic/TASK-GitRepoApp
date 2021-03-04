@@ -29,4 +29,15 @@ struct RepositoryDomainItem {
         self.issueAmount = issueAmount
         self.webPagePath = webPagePath
     }
+    
+    init(_ item: RepositoryResponseItem) {
+        self.repositoryName = item.name
+        self.authorName = item.owner.login
+        self.description = item.itemDescription ?? ""
+        self.isRepositoryPrivate = item.itemPrivate
+        self.watchAmount = item.watchersCount
+        self.starAmount = item.stargazersCount
+        self.issueAmount = item.openIssuesCount
+        self.webPagePath = item.htmlUrl
+    }
 }

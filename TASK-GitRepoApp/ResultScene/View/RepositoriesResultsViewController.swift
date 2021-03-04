@@ -1,9 +1,3 @@
-//
-//  RepositoriesResultsViewController.swift
-//  TASK-GitRepoApp
-//
-//  Created by Tomislav Gelesic on 01.03.2021..
-//
 
 import UIKit
 import Combine
@@ -13,7 +7,12 @@ class RepositoriesResultsViewController: UIViewController {
     var disposeBag = Set<AnyCancellable>()
     var viewModel: RepositoriesResultViewModel
     let tableView: UITableView = {
+        let backgroundView = UILabel()
+        backgroundView.text = "No result.."
+        backgroundView.textColor = .white
+        backgroundView.textAlignment = .center
         let tableView = UITableView()
+        tableView.backgroundView = backgroundView
         tableView.separatorStyle = .none
         tableView.backgroundColor = .gray
         tableView.register(RepositoriesResultsTableViewCell.self,
@@ -41,9 +40,7 @@ class RepositoriesResultsViewController: UIViewController {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
-    
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
-    
     deinit { print("RepositoriesResultsViewController deinit called.") }
     
     override func viewDidLoad() {
@@ -52,6 +49,7 @@ class RepositoriesResultsViewController: UIViewController {
         setupViews()
         setConstraintsTableView()
         setupSubscribers()
+        viewModel.searchSubject.send(viewModel.searchQuery)
     }
 }
 
@@ -72,13 +70,18 @@ extension RepositoriesResultsViewController {
         navigationController?.navigationBar.tintColor = .init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0)
     }
     
-    @objc func backTapped() { viewModel.backButtonTapped() }
+    @objc func backTapped() { viewModel.buttonTapped(.back) }
     
     @objc func searchDidChange() {
-        if let validText = searchTextField.text,
-           validText.count >= 2 {
-            viewModel.shouldGetFilteredScreenData = true
-            viewModel.showFilteredScreenData(query: validText)
+        if let validText = searchTextField.text {
+            if validText.isEmpty {
+                viewModel.shouldGetFilteredScreenData = false
+                viewModel.updateUISubject.send()
+            }
+            else if validText.count >= 2 {
+                viewModel.shouldGetFilteredScreenData = true
+                viewModel.showFilteredScreenData(query: validText)
+            }
         }
     }
     
@@ -94,35 +97,44 @@ extension RepositoriesResultsViewController {
         viewModel.updateUISubject
             .subscribe(on: DispatchQueue.global(qos: .background))
             .receive(on: RunLoop.main)
-            .sink { [unowned self] (_) in
-                self.tableView.reloadData()
-            }
+            .sink { [unowned self] (_) in self.tableView.reloadData() }
+            .store(in: &disposeBag)
+        
+        viewModel.initializeSearchSubject(subject: viewModel.searchSubject.eraseToAnyPublisher())
+            .store(in: &disposeBag)
+        
+        viewModel.spinnerSubject
+            .subscribe(on: DispatchQueue.global(qos: .background))
+            .receive(on: RunLoop.main)
+            .sink { [unowned self] (value) in value ? self.showSpinner() : self.hideSpinner() }
+            .store(in: &disposeBag)
+        
+        viewModel.alertSubject
+            .subscribe(on: DispatchQueue.global(qos: .background))
+            .receive(on: RunLoop.main)
+            .sink { [unowned self] (message) in self.showAlert(text: message) { } }
             .store(in: &disposeBag)
     }
 }
 
 extension RepositoriesResultsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if viewModel.shouldGetFilteredScreenData {
-            return viewModel.filteredScreenData.count
-        } else {
-            return viewModel.screenData.count
-        }
+        if viewModel.shouldGetFilteredScreenData { return viewModel.filteredScreenData.count }
+        else { return viewModel.screenData.count }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: RepositoriesResultsTableViewCell = tableView.dequeueReusableCell(for: indexPath)
-        if viewModel.shouldGetFilteredScreenData {
-            cell.configure(with: viewModel.filteredScreenData[indexPath.row])
-        } else {
-            cell.configure(with: viewModel.screenData[indexPath.row])
-        }
+        if viewModel.shouldGetFilteredScreenData { cell.configure(with: viewModel.filteredScreenData[indexPath.row]) }
+        else { cell.configure(with: viewModel.screenData[indexPath.row]) }
+        cell.openInBrowserTapped = { [unowned self] () in self.viewModel.buttonTapped(.openInBrowser(position: indexPath.row)) }
+        cell.authorDetailsTapped = { [unowned self] () in self.viewModel.buttonTapped(.showDetails(position: indexPath.row)) }
         return cell
     }
 }
 
 extension RepositoriesResultsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        viewModel.buttonTapped(.showDetails(position: indexPath.row))
     }
 }
 
@@ -130,7 +142,7 @@ extension RepositoriesResultsViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if let text = searchTextField.text, text.isEmpty {
             viewModel.shouldGetFilteredScreenData = false
-            viewModel.updateUISubject.send(true)
+            viewModel.updateUISubject.send()
         }
         textField.resignFirstResponder()
         return true

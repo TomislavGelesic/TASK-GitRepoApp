@@ -18,5 +18,11 @@ struct UserDomainItem {
         self.avatarPath = avatarPath
         self.webPagePath = webPagePath
     }
+    
+    init(_ item: UserResponseItem) {        
+        self.authorName = item.login
+        self.avatarPath = item.avatarUrl
+        self.webPagePath = item.htmlUrl
+    }
 }
 

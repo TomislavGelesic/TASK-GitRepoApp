@@ -25,31 +25,31 @@ class ResultSceneCoordinator: Coordinator, CoordinatorDelegate {
         
         var nextController: UIViewController?
         switch option {
-        case .repositories(search: let searchText):
-            let vm = RepositoriesResultViewModel()
+        case .repositories(search: let query):
+            let vm = RepositoriesResultViewModel(query: query, repository: RepositoriesResultRepositoryImpl())
             vm.coordinatorDelegate = self
             let vc = RepositoriesResultsViewController(viewModel: vm)
             nextController = vc
-        case .users(search: let searchText):
-            let vm = UsersResultViewModel()
+        case .users(search: let query):
+            let vm = UsersResultViewModel(query: query, repository: UserResultRepositoryImpl())
             vm.coordinatorDelegate = self
             let vc = UsersResultsViewController(viewModel: vm)
             nextController = vc
-        case .usersAndRepositories(search: let searchText):
-            let userVM = UsersResultViewModel()
+        case .usersAndRepositories(search: let query):
+            let userVM = UsersResultViewModel(query: query, repository: UserResultRepositoryImpl())
             userVM.coordinatorDelegate = self
             let userVC = UsersResultsViewController(viewModel: userVM)
-            let repoVM = RepositoriesResultViewModel()
+            let repoVM = RepositoriesResultViewModel(query: query, repository: RepositoriesResultRepositoryImpl())
             repoVM.coordinatorDelegate = self
             let repoVC = RepositoriesResultsViewController(viewModel: repoVM)
             nextController = TabmanAdapter(viewControllers: [repoVC, userVC])
         }
-        guard let controllersOK = nextController else { return }
-        navigationController.pushViewController(controllersOK, animated: true)
+        guard let controllerOK = nextController else { return }
+        navigationController.pushViewController(controllerOK, animated: true)
     }
     
     func viewControllerHasFinished(goTo option: SceneOption) {
-        navigationController.popViewController(animated: true)        
+        navigationController.popViewController(animated: false)
         delegate?.childDidFinish(self, next: option)
     }
     
