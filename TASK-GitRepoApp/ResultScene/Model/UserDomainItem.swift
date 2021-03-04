@@ -11,10 +11,12 @@ struct UserDomainItem {
 
     var authorName: String
     var avatarPath: String
+    var webPagePath: String
 
-    init(authorName: String = "", avatarPath: String = "") {
+    init(authorName: String = "", avatarPath: String = "", webPagePath: String = "") {
         self.authorName = authorName
         self.avatarPath = avatarPath
+        self.webPagePath = webPagePath
     }
 }
 

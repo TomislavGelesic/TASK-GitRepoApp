@@ -1,8 +1,13 @@
 
-import Foundation
+import UIKit
+import Combine
 
 class RepositoriesResultViewModel {
     
+    var updateUISubject = CurrentValueSubject<Bool, Never>(true)
+    var coordinatorDelegate: CoordinatorDelegate?
+    var shouldGetFilteredScreenData: Bool = false
+    var filteredScreenData: [RepositoryDomainItem] = .init()
     var screenData: [RepositoryDomainItem] = [
         RepositoryDomainItem(repositoryName: "repository 1",
                              authorName: "author 1",
@@ -48,4 +53,14 @@ class RepositoriesResultViewModel {
                              issueAmount: 1)
     ]   
     
+    deinit { print("RepositoriesResultViewModel deinit called.") }
+    
+    func showFilteredScreenData(query: String) {
+        filteredScreenData = screenData.filter { $0.repositoryName.contains(query) ? true : false }
+        updateUISubject.send(true)
+    }
+    
+    func backButtonTapped() {
+        coordinatorDelegate?.viewControllerHasFinished(goTo: .searchScene)
+    }
 }

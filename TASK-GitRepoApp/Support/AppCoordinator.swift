@@ -7,9 +7,6 @@ class AppCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     var navigationController: UINavigationController
     
-    func start() {
-        navigationController.pushViewController(SearchViewController(viewModel: SearchViewModel()), animated: true)
-    }
     
     init() {
         window = UIWindow()
@@ -19,33 +16,65 @@ class AppCoordinator: Coordinator {
         window?.makeKeyAndVisible()
         self.navigationController = navigationController
     }
-}
-
-extension AppCoordinator {
     
-//    func childDidFinish(_ coordinator: Coordinator, goTo nextScene: SceneOption) {
-//        childCoordinators = childCoordinators.filter({ (coord) -> Bool in
-//            if let _ = coordinator as? HomeSceneCoordinator { return false }
-//            else { return true }
-//        })
-//        switch nextScene {
-//        case .homeScene: break
-//        case .settingsScene(let image): goToSettingsScene(image: image)
-//        }
-//    }
-//
-//    func goToHomeScene(){
-//        let child = HomeSceneCoordinator(navigationController: navigationController)
-//        child.delegate = self
-//        child.start()
-//    }
-//
-//    func goToSettingsScene(image: UIImage) {
-//        let child = SettingsSceneCoordinator(navigationController: navigationController)
-//        child.delegate = self
-//        childCoordinators.append(child)
-//        child.backgroundImage = image
-//        child.start()
-//    }
+    deinit { print("AppCoordinator deinit called.") }
+    
+    func start() {
+        goToDetailScreen(DetailsDomainItem(title: "testing", webPagePath: URLRequest(url: URL(string: "https://www.apple.com")!)))
+    }
+//    func start() { goToSearchScene() }
+    
+    
+    func childDidFinish(_ coordinator: Coordinator, next: SceneOption) {
+        switch next {
+        case .detailScene(let info):
+            childCoordinators = childCoordinators.filter({ (coord) -> Bool in
+                if let _ = coordinator as? SearchSceneCoordinator, coordinator === coord { return true }
+                else { return false }
+            })
+            goToDetailScreen(info)
+        case .resultScene(let option):
+                childCoordinators = childCoordinators.filter({ (coord) -> Bool in
+                    if let _ = coordinator as? SearchSceneCoordinator, coordinator === coord { return true }
+                    else { return false }
+                })
+            goToResultScene(option)
+        case .searchScene:
+            childCoordinators = childCoordinators.filter({ (coord) -> Bool in
+                if let _ = coordinator as? SearchSceneCoordinator, coordinator === coord  { return true }
+                else { return false }
+            })
+        case .browserScene:
+            childCoordinators = childCoordinators.filter({ (coord) -> Bool in
+                if let _ = coordinator as? SearchSceneCoordinator, coordinator === coord { return true }
+                else { return false }
+            })
+            goToBrowserScene()
+        }
+    }
+
+    func goToSearchScene(){
+        let child = SearchSceneCoordinator(navigationController: navigationController)
+        child.delegate = self
+        child.start()
+    }
+
+    func goToResultScene(_ option: ResultSceneOption) {
+        let child = ResultSceneCoordinator(navigationController: navigationController)
+        child.delegate = self
+        childCoordinators.append(child)
+        child.start(option)
+    }
+    
+    func goToDetailScreen(_ info: DetailsDomainItem) {
+        let child = DetailsScreenCoordinator(navigationController: navigationController)
+        child.delegate = self
+        childCoordinators.append(child)
+        child.start(with: info)
+    }
+    
+    func goToBrowserScene() {
+        
+    }
 }
 
