@@ -14,6 +14,7 @@ class IconViewWithText2: UIView {
         let button = UIButton()
         button.setImage(UIImage(systemName: "slider.horizontal.3")?.withRenderingMode(.alwaysTemplate), for: .normal)
         button.tintColor = .black
+        button.imageView?.contentMode = .scaleAspectFit
         button.setPreferredSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 30.0), forImageIn: .normal)
         return button
     }()

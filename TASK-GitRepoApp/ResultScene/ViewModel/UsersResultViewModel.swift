@@ -24,7 +24,7 @@ class UsersResultViewModel {
     
     func showFilteredScreenData(query: String) {
         filteredScreenData = screenData.filter { $0.authorName.contains(query) ? true : false }
-        updateUISubject.send()
+        self.updateUISubject.send()
     }
     
     func initializeSearchSubject(subject: AnyPublisher<String, Never>) -> AnyCancellable {
@@ -59,9 +59,9 @@ class UsersResultViewModel {
         }
     }
     
-    func openUrlInBrowser(_ urlString: String) {
-        if let url = URL(string: urlString),
+    func openUrlInBrowser(_ userWebPagePath: String) {
+        if let url = URL(string: "\(userWebPagePath)?tab=repositories"),
            UIApplication.shared.canOpenURL(url) { UIApplication.shared.open(url, options: [:], completionHandler: nil) }
-        else { print("Couldn't open URL: '' \(urlString) '' in browser") }
+        else { print("Couldn't open URL: '' \(userWebPagePath)?tab=repositories '' in browser") }
     }
 }

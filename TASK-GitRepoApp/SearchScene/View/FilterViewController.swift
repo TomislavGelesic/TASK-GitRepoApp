@@ -124,7 +124,7 @@ extension FilterViewController {
         viewModel.optionSubject
             .subscribe(on: DispatchQueue.global(qos: .background))
             .receive(on: RunLoop.main)
-            .sink { [unowned self] (selectedOptions) in self.update(with: selectedOptions) }
+            .sink { [unowned self] (selectedOptions) in self.updateButtons(with: selectedOptions) }
             .store(in: &disposeBag)
         
         viewModel.enableApplyButtonSubject
@@ -149,7 +149,7 @@ extension FilterViewController {
         }
     }
     
-    func update(with options: [FilterOption]) {
+    func updateButtons(with options: [FilterOption]) {
         repositoriesButton.isSelected = false
         self.repositoriesButton.tintColor = .darkGray
         usersButton.isSelected = false
@@ -157,10 +157,10 @@ extension FilterViewController {
         for item in options {
             switch item {
             case .repositories:
-                self.repositoriesButton.tintColor = .init(red: 0.0, green: 0.8, blue: 0.0, alpha: 1.0)
+                self.repositoriesButton.tintColor = .init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0)
                 self.repositoriesButton.isSelected = true
             case .users:
-                self.usersButton.tintColor = .init(red: 0.0, green: 0.8, blue: 0.0, alpha: 1.0)
+                self.usersButton.tintColor = .init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0)
                 self.usersButton.isSelected = true
             }
         }

@@ -33,8 +33,9 @@ class SearchViewController: UIViewController {
     let filterView: IconViewWithText1 = {
        let view = IconViewWithText1(iconImage: UIImage(systemName: "slider.horizontal.3"), iconSize: 36, text: "0")
         view.icon.tintColor = .black
-        view.iconText.backgroundColor = .init(red: 0.0, green: 0.8, blue: 0.0, alpha: 1.0)
+        view.iconText.backgroundColor = .init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0)
         view.iconText.font = view.iconText.font.withSize(10)
+        view.iconText.textColor = .white
         return view
     }()
     
@@ -65,14 +66,6 @@ class SearchViewController: UIViewController {
         setupViews()
         setConstraints()
         setSubscribers()
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        filterView.iconText.text = "\(viewModel.selectedOptions.count)"
-        searchTextField.text = ""
-        searchButton.layer.borderColor = CGColor.init(red: 1.0, green: 1.0, blue: 1.0, alpha: 1)
-        searchButton.isEnabled = false
-        searchButton.backgroundColor = .lightGray
     }
 }
 

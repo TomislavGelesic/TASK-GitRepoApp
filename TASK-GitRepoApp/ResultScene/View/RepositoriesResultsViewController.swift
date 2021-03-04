@@ -7,7 +7,12 @@ class RepositoriesResultsViewController: UIViewController {
     var disposeBag = Set<AnyCancellable>()
     var viewModel: RepositoriesResultViewModel
     let tableView: UITableView = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.text = "Search match not found.."
+        label.textColor = .white
         let tableView = UITableView()
+        tableView.backgroundView = label
         tableView.separatorStyle = .none
         tableView.backgroundColor = .gray
         tableView.register(RepositoriesResultsTableViewCell.self,
@@ -90,14 +95,13 @@ extension RepositoriesResultsViewController {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.reloadData()
     }
     
     func setupSubscribers() {
         viewModel.updateUISubject
             .subscribe(on: DispatchQueue.global(qos: .background))
             .receive(on: RunLoop.main)
-            .sink { [unowned self] (_) in
+            .sink { [unowned self] (value) in
                 self.tableView.reloadData()
                 self.hideSpinner()
             }
