@@ -5,6 +5,7 @@ import Combine
 
 class SearchViewController: UIViewController {
 
+    var disposeBag = Set<AnyCancellable>()
     var viewModel: SearchViewModel
     
     let logoImage: UIImageView = {
@@ -28,12 +29,12 @@ class SearchViewController: UIViewController {
         return textField
     }()
     
-    let filterButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "slider.horizontal.3")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        button.tintColor = .black
-        button.setPreferredSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 30.0), forImageIn: .normal)
-        return button
+    let filterView: IconViewWithText1 = {
+       let view = IconViewWithText1(iconImage: UIImage(systemName: "slider.horizontal.3"), iconSize: 36, text: "0")
+        view.icon.tintColor = .black
+        view.iconText.backgroundColor = .init(red: 0.0, green: 0.8, blue: 0.0, alpha: 1.0)
+        view.iconText.font = view.iconText.font.withSize(10)
+        return view
     }()
     
     let searchButton: UIButton = {
@@ -63,6 +64,13 @@ class SearchViewController: UIViewController {
         setupNavigationBar()
         setupViews()
         setConstraints()
+        setSubscribers()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        filterView.iconText.text = "\(viewModel.selectedOptions.count)"
     }
 }
 
@@ -74,10 +82,20 @@ extension SearchViewController {
     
     func setupViews() {
         view.backgroundColor = .white
-        view.addSubviews([logoImage, searchTextField, searchButton, filterButton])
+        view.addSubviews([logoImage, searchTextField, searchButton, filterView])
         searchTextField.addTarget(self, action: #selector(searchTextFieldDidChange), for: .allEditingEvents)
         searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
-        filterButton.addTarget(self, action: #selector(filterButtonTapped), for: .touchUpInside)
+        filterView.icon.addTarget(self, action: #selector(filterViewTapped), for: .touchUpInside)
+    }
+    
+    func setSubscribers() {        
+        viewModel.updateFilterLabelSubject
+            .subscribe(on: DispatchQueue.global(qos: .background))
+            .receive(on: RunLoop.main)
+            .sink { [unowned self] (amount) in
+                self.filterView.iconText.text = "\(amount)"
+            }
+            .store(in: &disposeBag)
     }
     
     @objc func searchTextFieldDidChange() {
@@ -98,10 +116,13 @@ extension SearchViewController {
     }
     
     @objc func searchButtonTapped() {
-        viewModel.searchButtonTapped()
+        if let text = searchTextField.text,
+           !text.isEmpty {
+            viewModel.searchButtonTapped(for: text)
+        }
     }
     
-    @objc func filterButtonTapped() {
+    @objc func filterViewTapped() {
         viewModel.filterButtonTapped(on: self)
     }
     
@@ -112,15 +133,14 @@ extension SearchViewController {
     //MARK: CONSTRAINTS BELOW
     
     func setConstraints() {
-        setConstaraintsFilterButton()
+        setConstaraintsFilterView()
         setConstaraintsLogoImage()
         setConstaraintsSearchTextField()
         setConstaraintsSearchButton()
     }
     
-    func setConstaraintsFilterButton() {
-        filterButton.snp.makeConstraints { (make) in
-            make.width.height.equalTo(44)
+    func setConstaraintsFilterView() {
+        filterView.snp.makeConstraints { (make) in
             make.trailing.equalTo(view).offset(-10)
             make.top.equalTo(view.snp.top).offset(50)
         }

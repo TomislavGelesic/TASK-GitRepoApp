@@ -15,7 +15,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow()
         window?.backgroundColor = .white
-        let rootVC = SearchViewController(viewModel: SearchViewModel())
+        
+//        let iconIssue: IconViewWithText2 = {
+//            let view = IconViewWithText2(iconImage: UIImage(systemName: "exclamationmark.circle"), iconSize: 50, text: "0")
+//            return view
+//        }()
+//
+//        let rootVC = UIViewController()
+//        rootVC.view = iconIssue
+        
+        
+//        let rootVC = SearchViewController(viewModel: SearchViewModel())
+        
+        let rootVC = RepositoriesResultsViewController(viewModel: RepositoriesResultViewModel())
+        
         let navigationController = UINavigationController(rootViewController: rootVC)
         navigationController.navigationBar.isHidden = true
         window?.rootViewController = navigationController
