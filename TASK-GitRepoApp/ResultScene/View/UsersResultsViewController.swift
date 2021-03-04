@@ -31,8 +31,11 @@ class UsersResultsViewController: UIViewController {
         textField.leftView = iconView
         textField.leftViewMode = .always
         textField.placeholder = "Search"
+        textField.layer.masksToBounds = true
         textField.layer.borderWidth = 1
         textField.layer.borderColor = CGColor.init(red: 0.0, green: 0.0, blue: 0.0, alpha: 1)
+        textField.layer.cornerRadius = 5
+
         return textField
     }()
     

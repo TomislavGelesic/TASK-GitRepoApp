@@ -12,6 +12,8 @@ class RepositoriesResultsTableViewCell: UITableViewCell {
         view.backgroundColor = .white
         view.clipsToBounds = true
         view.layer.cornerRadius = 5
+        view.layer.borderWidth = 1
+        view.layer.borderColor = .init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0)
         return view
     }()
 
@@ -39,10 +41,12 @@ class RepositoriesResultsTableViewCell: UITableViewCell {
         button.titleLabel?.numberOfLines = 0
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.font = button.titleLabel?.font.withSize(12)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0)
+        button.setTitleColor(.init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0), for: .normal)
+        button.backgroundColor = .white
         button.clipsToBounds = true
         button.layer.cornerRadius = 5
+        button.layer.borderWidth = 1
+        button.layer.borderColor = .init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0)
         return button
     }()
     
@@ -52,18 +56,18 @@ class RepositoriesResultsTableViewCell: UITableViewCell {
         button.titleLabel?.numberOfLines = 0
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.font = button.titleLabel?.font.withSize(12)
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0), for: .normal)
         button.backgroundColor = .white
         button.clipsToBounds = true
         button.layer.cornerRadius = 5
         button.layer.borderWidth = 1
-        button.layer.borderColor = .init(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)
+        button.layer.borderColor = .init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0)
         return button
     }()
     
     let lineSeparator: UIView = {
         let view = UIView()
-        view.backgroundColor = .gray
+        view.backgroundColor = .init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0)
         return view
     }()
     

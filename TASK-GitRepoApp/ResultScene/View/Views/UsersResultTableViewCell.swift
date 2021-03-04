@@ -16,7 +16,11 @@ class UsersResultTableViewCell: UITableViewCell {
     let avatarImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.tintColor = .green
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.masksToBounds = true
+        imageView.layer.cornerRadius = 15
+        imageView.layer.borderWidth = 1
+        imageView.layer.borderColor = .init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0)
         return imageView
     }()
     
@@ -25,6 +29,8 @@ class UsersResultTableViewCell: UITableViewCell {
         view.backgroundColor = .white
         view.clipsToBounds = true
         view.layer.cornerRadius = 5
+        view.layer.borderWidth = 1
+        view.layer.borderColor = .init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0)
         return view
     }()
     
@@ -37,6 +43,8 @@ class UsersResultTableViewCell: UITableViewCell {
         button.setTitleColor(.init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0), for: .normal)
         button.clipsToBounds = true
         button.layer.cornerRadius = 5
+        button.layer.borderWidth = 1
+        button.layer.borderColor = .init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0)
         return button
     }()
     
@@ -49,6 +57,8 @@ class UsersResultTableViewCell: UITableViewCell {
         button.setTitleColor(.init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0), for: .normal)
         button.clipsToBounds = true
         button.layer.cornerRadius = 5
+        button.layer.borderWidth = 1
+        button.layer.borderColor = .init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0)
         return button
     }()
     
@@ -106,7 +116,7 @@ extension UsersResultTableViewCell {
     func setConstraintsAuthorNameLabel() {
         authorNameLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(contentSubview).offset(20)
-            make.top.equalTo(contentSubview).offset(40)
+            make.top.equalTo(contentSubview).offset(20)
             make.height.equalTo(50)
             make.trailing.equalTo(avatarImageView)
         }
@@ -116,7 +126,8 @@ extension UsersResultTableViewCell {
         avatarImageView.snp.makeConstraints { (make) in
             make.width.height.equalTo(120)
             make.trailing.equalTo(contentSubview).offset(-15)
-            make.top.equalTo(contentSubview).offset(15)
+            make.top.equalTo(contentSubview).offset(20)
+            make.bottom.equalTo(contentSubview).offset(-20)
         }
     }
     
