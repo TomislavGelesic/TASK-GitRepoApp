@@ -7,12 +7,7 @@ class UsersResultsViewController: UIViewController {
     var disposeBag = Set<AnyCancellable>()
     var viewModel: UsersResultViewModel
     let tableView: UITableView = {
-        let backgroundView = UILabel()
-        backgroundView.text = "No result.."
-        backgroundView.textColor = .white
-        backgroundView.textAlignment = .center
         let tableView = UITableView()
-        tableView.backgroundView = backgroundView
         tableView.separatorStyle = .none
         tableView.backgroundColor = .gray
         tableView.register(UsersResultTableViewCell.self,
@@ -52,6 +47,7 @@ class UsersResultsViewController: UIViewController {
         setupViews()
         setConstraintsTableView()
         setupSubscribers()
+        showSpinner()
         viewModel.searchSubject.send(viewModel.searchQuery)
     }
 
@@ -83,6 +79,7 @@ extension UsersResultsViewController {
                 viewModel.updateUISubject.send()
             }
             else if validText.count >= 2 {
+                showSpinner()
                 viewModel.shouldGetFilteredScreenData = true
                 viewModel.showFilteredScreenData(query: validText)
             }
@@ -103,6 +100,7 @@ extension UsersResultsViewController {
             .receive(on: RunLoop.main)
             .sink { [unowned self] (_) in
                 self.tableView.reloadData()
+                self.hideSpinner()
             }
             .store(in: &disposeBag)       
     

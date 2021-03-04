@@ -47,7 +47,8 @@ class IconViewWithText2: UIView {
         iconText.snp.makeConstraints { (make) in
             make.top.equalTo(icon.snp.bottom).offset(2)
             make.centerX.equalTo(self)
-            make.width.equalTo(icon)
+            if iconSize < 40 { make.width.equalTo(40) }
+            else { make.width.equalTo(iconSize) }
             make.height.equalTo(15)
             make.bottom.equalTo(self)
         }

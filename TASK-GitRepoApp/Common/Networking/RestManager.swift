@@ -13,12 +13,23 @@ public class RestManager {
         return sessionManager
     }()
     
-    static func requestObservable<T: Codable>(url: String) -> AnyPublisher<Result<T, AFError>, Never> {
-        return RestManager.manager
-            .request(url)
-            .validate(statusCode: 200..<423)
-            .publishDecodable(type: T.self)
-            .result()
-            .eraseToAnyPublisher()
+    static func requestObservable<T: Codable>(url: String) -> AnyPublisher<Result<T, RestManagerError>, Never> {
+        return Future<Result<T, RestManagerError>, Never> { promise in
+            #warning("Whats status code 422 for githubapi.com ?")
+            AF.request(url)
+                .validate(statusCode: 200..<423)
+                .responseData { (response) in
+                    if let data = response.data {                        
+                        if let parsedData: T = SerializationManager.parseData(jsonData: data) {
+                            promise(.success(.success(parsedData)))
+                        }
+                        promise(.success(.failure(.decodingError)))
+                    } else {
+                        promise(.success(.failure(.noDataError)))
+                    }
+                }
+        }.eraseToAnyPublisher()
     }
 }
+
+

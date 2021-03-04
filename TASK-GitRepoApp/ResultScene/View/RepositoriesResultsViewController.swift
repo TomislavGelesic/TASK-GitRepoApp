@@ -7,12 +7,7 @@ class RepositoriesResultsViewController: UIViewController {
     var disposeBag = Set<AnyCancellable>()
     var viewModel: RepositoriesResultViewModel
     let tableView: UITableView = {
-        let backgroundView = UILabel()
-        backgroundView.text = "No result.."
-        backgroundView.textColor = .white
-        backgroundView.textAlignment = .center
         let tableView = UITableView()
-        tableView.backgroundView = backgroundView
         tableView.separatorStyle = .none
         tableView.backgroundColor = .gray
         tableView.register(RepositoriesResultsTableViewCell.self,
@@ -51,8 +46,10 @@ class RepositoriesResultsViewController: UIViewController {
         setupViews()
         setConstraintsTableView()
         setupSubscribers()
+        showSpinner()
         viewModel.searchSubject.send(viewModel.searchQuery)
     }
+    
 }
 
 extension RepositoriesResultsViewController {
@@ -81,6 +78,7 @@ extension RepositoriesResultsViewController {
                 viewModel.updateUISubject.send()
             }
             else if validText.count >= 2 {
+                showSpinner()
                 viewModel.shouldGetFilteredScreenData = true
                 viewModel.showFilteredScreenData(query: validText)
             }
@@ -99,7 +97,10 @@ extension RepositoriesResultsViewController {
         viewModel.updateUISubject
             .subscribe(on: DispatchQueue.global(qos: .background))
             .receive(on: RunLoop.main)
-            .sink { [unowned self] (_) in self.tableView.reloadData() }
+            .sink { [unowned self] (_) in
+                self.tableView.reloadData()
+                self.hideSpinner()
+            }
             .store(in: &disposeBag)
         
         viewModel.initializeSearchSubject(subject: viewModel.searchSubject.eraseToAnyPublisher())

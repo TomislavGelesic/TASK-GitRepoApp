@@ -29,7 +29,7 @@ class UsersResultTableViewCell: UITableViewCell {
         view.backgroundColor = .white
         view.clipsToBounds = true
         view.layer.cornerRadius = 5
-        view.layer.borderWidth = 1
+        view.layer.borderWidth = 2
         view.layer.borderColor = .init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0)
         return view
     }()
@@ -133,21 +133,19 @@ extension UsersResultTableViewCell {
     
     func setConstraintsOpenProfileButton() {
         openProfileButton.snp.makeConstraints { (make) in
-            make.top.equalTo(authorNameLabel.snp.bottom).offset(20)
             make.leading.equalTo(contentSubview).offset(10)
             make.width.equalTo(70)
             make.height.equalTo(44)
-            make.bottom.equalTo(contentSubview).offset(-5)
+            make.bottom.equalTo(contentSubview).offset(-10)
         }
     }
     
     func setConstraintsOpenRepositoriesButton() {
         openRepositoriesButton.snp.makeConstraints { (make) in
-            make.top.equalTo(openProfileButton)
-            make.leading.equalTo(openProfileButton.snp.trailing).offset(5)
+            make.leading.equalTo(openProfileButton.snp.trailing).offset(10)
             make.width.equalTo(80)
             make.height.equalTo(44)
-            make.bottom.equalTo(contentSubview).offset(-5)
+            make.bottom.equalTo(contentSubview).offset(-10)
         }
     }
 }

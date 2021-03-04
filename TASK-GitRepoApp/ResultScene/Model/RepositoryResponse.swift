@@ -8,7 +8,7 @@ import Foundation
 struct RepositoryResponse: Codable {
     var items: [RepositoryResponseItem]
 }
-#warning("fork icon with text missing in UI vc")
+
 struct RepositoryResponseItem: Codable {
     var name: String
     var itemPrivate: Bool
