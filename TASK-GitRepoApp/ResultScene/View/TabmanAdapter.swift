@@ -56,9 +56,6 @@ extension TabmanAdapter: PageboyViewControllerDataSource, TMBarDataSource {
     }
     func viewController(for pageboyViewController: PageboyViewController,
                         at index: PageboyViewController.PageIndex) -> UIViewController? {
-        if pageboyViewController is RepositoriesResultsViewController {
-            
-        }
         return viewControllers[index]
     }
     func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {

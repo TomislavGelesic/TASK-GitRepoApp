@@ -18,13 +18,9 @@ class AppCoordinator: Coordinator {
     }
     
     deinit { print("AppCoordinator deinit called.") }
-    
-    func start() {
-        goToDetailScreen(DetailsDomainItem(title: "testing", webPagePath: URLRequest(url: URL(string: "https://www.apple.com")!)))
-    }
-//    func start() { goToSearchScene() }
-    
-    
+
+    func start() { goToSearchScene() }
+
     func childDidFinish(_ coordinator: Coordinator, next: SceneOption) {
         switch next {
         case .detailScene(let info):
