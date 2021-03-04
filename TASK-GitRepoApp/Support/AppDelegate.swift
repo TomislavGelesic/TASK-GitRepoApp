@@ -27,7 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //        let rootVC = SearchViewController(viewModel: SearchViewModel())
         
-        let rootVC = RepositoriesResultsViewController(viewModel: RepositoriesResultViewModel())
+//        let rootVC = RepositoriesResultsViewController(viewModel: RepositoriesResultViewModel())
+        
+        let rootVC = UsersResultsViewController(viewModel: UsersResultViewModel())
         
         let navigationController = UINavigationController(rootViewController: rootVC)
         navigationController.navigationBar.isHidden = true

@@ -36,6 +36,7 @@ class RepositoriesResultsTableViewCell: UITableViewCell {
         let button = UIButton()
         button.setTitle("Author\ndetails", for: .normal)
         button.titleLabel?.numberOfLines = 0
+        button.titleLabel?.textAlignment = .center
         button.titleLabel?.font = button.titleLabel?.font.withSize(12)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0)
@@ -48,6 +49,7 @@ class RepositoriesResultsTableViewCell: UITableViewCell {
         let button = UIButton()
         button.setTitle("Open in\n browser", for: .normal)
         button.titleLabel?.numberOfLines = 0
+        button.titleLabel?.textAlignment = .center
         button.titleLabel?.font = button.titleLabel?.font.withSize(12)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .white
