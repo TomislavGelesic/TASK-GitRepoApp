@@ -42,13 +42,29 @@ extension DetailsScreenViewController {
     }
     func setupViews() {
         webView.uiDelegate = self
+        webView.navigationDelegate = self
         view.addSubview(webView)
     }
     @objc func backTapped() { viewModel.backButtonTapped() }
-    func showWebPage() { if let validPath = viewModel.screenData.webPagePath { webView.load(validPath) } }
+    
+    func showWebPage() {
+        if let validURL = URL(string: viewModel.screenData.webPagePath),
+           UIApplication.shared.canOpenURL(validURL) {
+            webView.load(URLRequest(url: validURL))
+        }
+    }
 }
 
 extension DetailsScreenViewController: WKUIDelegate { }
+
+extension DetailsScreenViewController: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        showAlert(text: "Couldn't access server to get data.") { [unowned self] in
+            self.showSpinner()
+            self.showInfoText(text: "Please connect to internet\n and try search again.")
+        }
+    }
+}
 
 
 extension DetailsScreenViewController {
