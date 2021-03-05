@@ -10,7 +10,6 @@
 		60170B2025ED13EB00C4EB3D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60170B1F25ED13EB00C4EB3D /* AppDelegate.swift */; };
 		60170B2925ED13EC00C4EB3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60170B2825ED13EC00C4EB3D /* Assets.xcassets */; };
 		60170B2C25ED13EC00C4EB3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60170B2A25ED13EC00C4EB3D /* LaunchScreen.storyboard */; };
-		60170B3725ED13EC00C4EB3D /* TASK_GitRepoAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60170B3625ED13EC00C4EB3D /* TASK_GitRepoAppTests.swift */; };
 		60170B7125ED175600C4EB3D /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60170B7025ED175600C4EB3D /* SearchViewController.swift */; };
 		60170B7925ED17B600C4EB3D /* RestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60170B7825ED17B600C4EB3D /* RestManager.swift */; };
 		60170B8125ED180A00C4EB3D /* SerializationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60170B8025ED180A00C4EB3D /* SerializationManager.swift */; };
@@ -36,8 +35,6 @@
 		6048F09225EFF09D0009703A /* DetailsDomainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6048F09125EFF09D0009703A /* DetailsDomainItem.swift */; };
 		6048F09625F0C9FC0009703A /* ResultButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6048F09525F0C9FC0009703A /* ResultButtonType.swift */; };
 		6048F0A825F0D89F0009703A /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6048F0A725F0D89F0009703A /* UserResponse.swift */; };
-		6048F0B125F0D94C0009703A /* UserResponseJSONMockFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6048F0B025F0D94C0009703A /* UserResponseJSONMockFile.swift */; };
-		6048F0B725F0D95E0009703A /* RepositoryResponseJSONMockFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6048F0B625F0D95E0009703A /* RepositoryResponseJSONMockFile.swift */; };
 		6048F0BB25F0D9960009703A /* RepositoryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6048F0BA25F0D9960009703A /* RepositoryResponse.swift */; };
 		6048F0C725F0DF010009703A /* RepositoriesResultRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6048F0C625F0DF010009703A /* RepositoriesResultRepositoryImpl.swift */; };
 		6048F0DA25F0E4AC0009703A /* ResultRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6048F0D925F0E4AC0009703A /* ResultRepository.swift */; };
@@ -53,6 +50,10 @@
 		6079CAB225EED34E00C2EAC2 /* ResultSceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6079CAB125EED34E00C2EAC2 /* ResultSceneCoordinator.swift */; };
 		6079CAB825EED3A400C2EAC2 /* ResultSceneOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6079CAB725EED3A400C2EAC2 /* ResultSceneOption.swift */; };
 		6079CABC25EED5E000C2EAC2 /* TabmanAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6079CABB25EED5E000C2EAC2 /* TabmanAdapter.swift */; };
+		608A804325F24E74009A9B16 /* UserResponseJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 608A804225F24E74009A9B16 /* UserResponseJSON.json */; };
+		608A804925F24E9F009A9B16 /* RepositoriesResponseJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 608A804825F24E9F009A9B16 /* RepositoriesResponseJSON.json */; };
+		608A805225F24EDB009A9B16 /* ResultSceneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A805125F24EDB009A9B16 /* ResultSceneTests.swift */; };
+		608A805825F24F87009A9B16 /* GeneratedMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 608A805725F24F87009A9B16 /* GeneratedMocks.swift */; };
 		609282E025ED890100706F68 /* UsersResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609282DF25ED890100706F68 /* UsersResultsViewController.swift */; };
 		609282E625ED891300706F68 /* RepositoriesResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609282E525ED891300706F68 /* RepositoriesResultsViewController.swift */; };
 		609282EF25EE359300706F68 /* FilterViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609282EE25EE359300706F68 /* FilterViewModelDelegate.swift */; };
@@ -85,7 +86,6 @@
 		60170B2B25ED13EC00C4EB3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		60170B2D25ED13EC00C4EB3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		60170B3225ED13EC00C4EB3D /* TASK-GitRepoAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TASK-GitRepoAppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		60170B3625ED13EC00C4EB3D /* TASK_GitRepoAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TASK_GitRepoAppTests.swift; sourceTree = "<group>"; };
 		60170B3825ED13EC00C4EB3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		60170B7025ED175600C4EB3D /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		60170B7825ED17B600C4EB3D /* RestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestManager.swift; sourceTree = "<group>"; };
@@ -112,8 +112,6 @@
 		6048F09125EFF09D0009703A /* DetailsDomainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsDomainItem.swift; sourceTree = "<group>"; };
 		6048F09525F0C9FC0009703A /* ResultButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultButtonType.swift; sourceTree = "<group>"; };
 		6048F0A725F0D89F0009703A /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
-		6048F0B025F0D94C0009703A /* UserResponseJSONMockFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponseJSONMockFile.swift; sourceTree = "<group>"; };
-		6048F0B625F0D95E0009703A /* RepositoryResponseJSONMockFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryResponseJSONMockFile.swift; sourceTree = "<group>"; };
 		6048F0BA25F0D9960009703A /* RepositoryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryResponse.swift; sourceTree = "<group>"; };
 		6048F0C625F0DF010009703A /* RepositoriesResultRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesResultRepositoryImpl.swift; sourceTree = "<group>"; };
 		6048F0D925F0E4AC0009703A /* ResultRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ResultRepository.swift; path = "TASK-GitRepoApp/ResultScene/Protocols/ResultRepository.swift"; sourceTree = SOURCE_ROOT; };
@@ -129,6 +127,10 @@
 		6079CAB125EED34E00C2EAC2 /* ResultSceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSceneCoordinator.swift; sourceTree = "<group>"; };
 		6079CAB725EED3A400C2EAC2 /* ResultSceneOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSceneOption.swift; sourceTree = "<group>"; };
 		6079CABB25EED5E000C2EAC2 /* TabmanAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabmanAdapter.swift; sourceTree = "<group>"; };
+		608A804225F24E74009A9B16 /* UserResponseJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserResponseJSON.json; sourceTree = "<group>"; };
+		608A804825F24E9F009A9B16 /* RepositoriesResponseJSON.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = RepositoriesResponseJSON.json; sourceTree = "<group>"; };
+		608A805125F24EDB009A9B16 /* ResultSceneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSceneTests.swift; sourceTree = "<group>"; };
+		608A805725F24F87009A9B16 /* GeneratedMocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedMocks.swift; sourceTree = "<group>"; };
 		609282DF25ED890100706F68 /* UsersResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersResultsViewController.swift; sourceTree = "<group>"; };
 		609282E525ED891300706F68 /* RepositoriesResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesResultsViewController.swift; sourceTree = "<group>"; };
 		609282EE25EE359300706F68 /* FilterViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModelDelegate.swift; sourceTree = "<group>"; };
@@ -206,8 +208,9 @@
 		60170B3525ED13EC00C4EB3D /* TASK-GitRepoAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				608A805125F24EDB009A9B16 /* ResultSceneTests.swift */,
+				608A805025F24EAF009A9B16 /* CuckooMocks */,
 				6048F0AF25F0D9260009703A /* MockJSONFiles */,
-				60170B3625ED13EC00C4EB3D /* TASK_GitRepoAppTests.swift */,
 				60170B3825ED13EC00C4EB3D /* Info.plist */,
 			);
 			path = "TASK-GitRepoAppTests";
@@ -383,8 +386,8 @@
 		6048F0AF25F0D9260009703A /* MockJSONFiles */ = {
 			isa = PBXGroup;
 			children = (
-				6048F0B025F0D94C0009703A /* UserResponseJSONMockFile.swift */,
-				6048F0B625F0D95E0009703A /* RepositoryResponseJSONMockFile.swift */,
+				608A804225F24E74009A9B16 /* UserResponseJSON.json */,
+				608A804825F24E9F009A9B16 /* RepositoriesResponseJSON.json */,
 			);
 			path = MockJSONFiles;
 			sourceTree = "<group>";
@@ -403,6 +406,14 @@
 				6079CAB125EED34E00C2EAC2 /* ResultSceneCoordinator.swift */,
 			);
 			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		608A805025F24EAF009A9B16 /* CuckooMocks */ = {
+			isa = PBXGroup;
+			children = (
+				608A805725F24F87009A9B16 /* GeneratedMocks.swift */,
+			);
+			path = CuckooMocks;
 			sourceTree = "<group>";
 		};
 		609282D625ED88A700706F68 /* ResultScene */ = {
@@ -515,6 +526,7 @@
 			buildConfigurationList = 60170B4925ED13EC00C4EB3D /* Build configuration list for PBXNativeTarget "TASK-GitRepoAppTests" */;
 			buildPhases = (
 				C90518573BC759C36CD1DA81 /* [CP] Check Pods Manifest.lock */,
+				608A803D25F24D2A009A9B16 /* ShellScript */,
 				60170B2E25ED13EC00C4EB3D /* Sources */,
 				60170B2F25ED13EC00C4EB3D /* Frameworks */,
 				60170B3025ED13EC00C4EB3D /* Resources */,
@@ -544,6 +556,7 @@
 					};
 					60170B3125ED13EC00C4EB3D = {
 						CreatedOnToolsVersion = 12.4;
+						LastSwiftMigration = 1240;
 						TestTargetID = 60170B1B25ED13EB00C4EB3D;
 					};
 				};
@@ -581,6 +594,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				608A804325F24E74009A9B16 /* UserResponseJSON.json in Resources */,
+				608A804925F24E9F009A9B16 /* RepositoriesResponseJSON.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -603,6 +618,27 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TASK-GitRepoAppTests/Pods-TASK-GitRepoAppTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		608A803D25F24D2A009A9B16 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PROJECT_DIR}/${PROJECT_NAME}/ResultScene/Coordinators/ResultSceneCoordinator.swift",
+				"${PROJECT_DIR}/${PROJECT_NAME}/ResultScene/Model/UserResultRepositoryImpl.swift",
+				"${PROJECT_DIR}/${PROJECT_NAME}/ResultScene/Model/RepositoriesResultRepositoryImpl.swift",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${PROJECT_DIR}/${PROJECT_NAME}Tests/CuckooMocks/GeneratedMocks.swift",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Define output file. Change \"${PROJECT_DIR}/${PROJECT_NAME}Tests\" to your test's root source folder, if it's not the default name.\nOUTPUT_FILE=\"${PROJECT_DIR}/${PROJECT_NAME}Tests/CuckooMocks/GeneratedMocks.swift\"\necho \"Generated Mocks File = ${OUTPUT_FILE}\"\n\n# Define input directory. Change \"${PROJECT_DIR}/${PROJECT_NAME}\" to your project's root source folder, if it's not the default name.\nINPUT_DIR=\"${PROJECT_DIR}/${PROJECT_NAME}\"\necho \"Mocks Input Directory = ${INPUT_DIR}\"\n\n# Generate mock files, include as many input files as you'd like to create mocks for.\n\"${PODS_ROOT}/Cuckoo/run\" generate --testable \"${PROJECT_NAME}\" \\\n--output \"${OUTPUT_FILE}\" \\\n\"${PROJECT_DIR}/${PROJECT_NAME}/ResultScene/Model/RepositoriesResultRepositoryImpl.swift\" \\\n\"${PROJECT_DIR}/${PROJECT_NAME}/ResultScene/Model/UserResultRepositoryImpl.swift\" \\\n\"${PROJECT_DIR}/${PROJECT_NAME}/ResultScene/Coordinators/ResultSceneCoordinator.swift\"\n# ... and so forth, the last line should never end with a backslash\n\n# After running once, locate `GeneratedMocks.swift` and drag it into your Xcode test target group.\n";
 		};
 		C0C75924A673B3C597890DC3 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -728,9 +764,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				60170B3725ED13EC00C4EB3D /* TASK_GitRepoAppTests.swift in Sources */,
-				6048F0B725F0D95E0009703A /* RepositoryResponseJSONMockFile.swift in Sources */,
-				6048F0B125F0D94C0009703A /* UserResponseJSONMockFile.swift in Sources */,
+				608A805225F24EDB009A9B16 /* ResultSceneTests.swift in Sources */,
+				608A805825F24F87009A9B16 /* GeneratedMocks.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -916,6 +951,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "TASK-GitRepoAppTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
@@ -926,6 +962,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.TASK-GitRepoAppTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TASK-GitRepoApp.app/TASK-GitRepoApp";
@@ -938,6 +975,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "TASK-GitRepoAppTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;

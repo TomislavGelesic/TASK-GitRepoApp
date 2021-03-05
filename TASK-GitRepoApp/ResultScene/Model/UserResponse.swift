@@ -32,7 +32,8 @@ struct UserResponseItem: Codable {
     var score: Int
 
     enum CodingKeys: String, CodingKey {
-        case login, id
+        case login
+        case id
         case nodeId = "node_id"
         case avatarUrl = "avatar_url"
         case gravatarId = "gravatar_id"

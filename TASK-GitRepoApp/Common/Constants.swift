@@ -14,10 +14,10 @@ struct Constants {
     
 
     //    mock users response
-    //    https://api.github.com/search/repositories?q=Technology
+    //    https://api.github.com/search/users?q=Technology
 
     //    mock repositories response
-    //    https://api.github.com/search/repositories?q=
+    //    https://api.github.com/search/repositories?q=Tom
 }
 
 
