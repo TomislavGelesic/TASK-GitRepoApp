@@ -1,13 +1,11 @@
 
 import UIKit
 import Combine
-import Alamofire
 
 class RepositoriesResultViewModel {
     
+    weak var viewControllerDelegate: RepositoriesResultsViewController?
     var coordinatorDelegate: CoordinatorDelegate?
-    var shouldGetFilteredScreenData: Bool = false
-    var filteredScreenData: [RepositoryDomainItem] = .init()
     var screenData = [RepositoryDomainItem]()
     var repository: RepositoriesResultRepositoryImpl
     var searchQuery: String
@@ -19,17 +17,14 @@ class RepositoriesResultViewModel {
     init(query: String, repository: RepositoriesResultRepositoryImpl) {
         self.repository = repository
         self.searchQuery = query
-    }    
-    deinit { print("RepositoriesResultViewModel deinit called.") }
-    
-    func showFilteredScreenData(query: String) {
-        filteredScreenData = screenData.filter { $0.repositoryName.contains(query) ? true : false }
-        updateUISubject.send()
     }
+    deinit { print("RepositoriesResultViewModel deinit called.") }
     
     func initializeSearchSubject(subject: AnyPublisher<String, Never>) -> AnyCancellable {
         
         return subject
+            .debounce(for: .seconds(0.5), scheduler: DispatchQueue.global())
+            .removeDuplicates()
             .flatMap({ [unowned self] (query) -> AnyPublisher<Result<RepositoryResponse, RestManagerError>, Never> in
                 return repository.fetch(matching: query)
             })
@@ -39,7 +34,8 @@ class RepositoriesResultViewModel {
                 switch result {
                 case .success(let response):
                     let data = response.items.map{RepositoryDomainItem($0)}
-                    self.screenData = data
+                    if self.screenData.isEmpty { self.viewControllerDelegate?.showEmptyTableViewBackgroundLabel(true) }
+                    else { self.viewControllerDelegate?.showEmptyTableViewBackgroundLabel(false) }
                     self.updateUISubject.send()
                 case .failure(let error):
                     print(error)
@@ -47,6 +43,14 @@ class RepositoriesResultViewModel {
                     self.alertSubject.send("Couldn't access server to get data.")
                 }
             })
+    }
+    
+    func searchInputChanged(_ query: String?) {
+        if let validQuery = query,
+           validQuery.count >= 2 {
+            viewControllerDelegate?.showSpinner()
+            searchSubject.send(validQuery)
+        }
     }
     
     func buttonTapped(_ type: ResultButtonType) {
@@ -58,13 +62,11 @@ class RepositoriesResultViewModel {
         case .showDetails(position: let position):
             coordinatorDelegate?.viewControllerHasFinished(goTo: .detailScene(info: DetailsDomainItem(screenData[position])))
         }
-    }    
+    }
     
     func openUrlInBrowser(_ urlString: String) {
         if let url = URL(string: urlString),
-           UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-        }
+           UIApplication.shared.canOpenURL(url) { UIApplication.shared.open(url, options: [:], completionHandler: nil) }
         else { print("Couldn't open URL: '' \(urlString) '' in browser") }
     }
 }

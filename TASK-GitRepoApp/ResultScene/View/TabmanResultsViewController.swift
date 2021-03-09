@@ -1,22 +1,14 @@
-//
-//  TabViewController.swift
-//  TASK-GitRepoApp
-//
-//  Created by Tomislav Gelesic on 02.03.2021..
-//
 
 import UIKit
 import Tabman
 import Pageboy
 
-class TabmanAdapter: TabmanViewController {
+class TabmanResultsViewController: TabmanViewController {
     
     var viewControllers: [UIViewController]
     
     init(viewControllers: [UIViewController]) {
-        self.viewControllers = viewControllers.map({ (vc) -> UINavigationController in
-            return UINavigationController(rootViewController: vc)
-        })
+        self.viewControllers = viewControllers
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -27,20 +19,13 @@ class TabmanAdapter: TabmanViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.dataSource = self
-        let bar = TMBar.ButtonBar()
-        bar.layout.transitionStyle = .snap
-        bar.layout.contentMode = .fit
-        bar.buttons.customize { (button) in
-            button.tintColor = .black
-            button.selectedTintColor = .init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0)
-        }
-        bar.indicator.tintColor = .init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0)
-        addBar(bar, dataSource: self, at: .bottom)
+        setupTMBar()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.isHidden = true
+        navigationController?.navigationBar.isHidden = false
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -50,7 +35,18 @@ class TabmanAdapter: TabmanViewController {
     }
 }
 
-extension TabmanAdapter: PageboyViewControllerDataSource, TMBarDataSource {
+extension TabmanResultsViewController: PageboyViewControllerDataSource, TMBarDataSource {
+    func setupTMBar() {
+        let bar = TMBar.ButtonBar()
+        bar.layout.transitionStyle = .snap
+        bar.layout.contentMode = .fit
+        bar.buttons.customize { (button) in
+            button.tintColor = .black
+            button.selectedTintColor = .init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0)
+        }
+        bar.indicator.tintColor = .init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0)
+        addBar(bar, dataSource: self, at: .top)
+    }
     func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
         return viewControllers.count
     }
@@ -69,6 +65,21 @@ extension TabmanAdapter: PageboyViewControllerDataSource, TMBarDataSource {
             return TMBarItem(title: "Users")
         default:
             return TMBarItem(title: "\(index)")
+        }
+    }
+    func searchInputChanged(_ query: String?) {
+        switch self.currentIndex {
+        case 0:
+            if let repoVC = viewControllers[0] as? RepositoriesResultsViewController {
+                repoVC.viewModel.searchInputChanged(query)
+            }
+        case 1:
+            if let usersVC = viewControllers[1] as? UsersResultsViewController {
+                usersVC.viewModel.searchInputChanged(query)
+            }
+        default:
+            print("ACCESSING INVALID INDEX -- TabmanAdapterViewController: @objc func searchDidChange()")
+            break
         }
     }
 }

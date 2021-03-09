@@ -5,9 +5,8 @@ import Alamofire
 
 class UsersResultViewModel {
     
+    weak var viewControllerDelegate: UsersResultsViewController?
     var coordinatorDelegate: CoordinatorDelegate?
-    var shouldGetFilteredScreenData: Bool = false
-    var filteredScreenData: [UserDomainItem] = .init()
     var screenData = [UserDomainItem]()
     var searchQuery: String
     var repository: UserResultRepositoryImpl
@@ -22,14 +21,11 @@ class UsersResultViewModel {
     }
     deinit { print("UsersResultViewModel deinit called.") }
     
-    func showFilteredScreenData(query: String) {
-        filteredScreenData = screenData.filter { $0.authorName.contains(query) ? true : false }
-        self.updateUISubject.send()
-    }
-    
     func initializeSearchSubject(subject: AnyPublisher<String, Never>) -> AnyCancellable {
         
         return subject
+            .debounce(for: .seconds(0.5), scheduler: DispatchQueue.global())
+            .removeDuplicates()
             .flatMap({ [unowned self] (query) -> AnyPublisher<Result<UserResponse, RestManagerError>, Never> in
                 return repository.fetch(matching: query)
             })
@@ -39,6 +35,8 @@ class UsersResultViewModel {
                 switch result {
                 case .success(let response):
                     self.screenData = response.items.map{ UserDomainItem($0)}
+                    if self.screenData.isEmpty { self.viewControllerDelegate?.showEmptyTableViewBackgroundLabel(true) }
+                    else { self.viewControllerDelegate?.showEmptyTableViewBackgroundLabel(false) }
                     self.updateUISubject.send()
                 case .failure(let error):
                     print(error)
@@ -46,6 +44,14 @@ class UsersResultViewModel {
                     self.alertSubject.send("Couldn't access server to get data.")
                 }
             })
+    }
+    
+    func searchInputChanged(_ query: String?) {
+        if let validQuery = query,
+           validQuery.count >= 2 {
+                viewControllerDelegate?.showSpinner()
+                searchSubject.send(validQuery)
+        }
     }
     
     func buttonTapped(_ type: ResultButtonType) {
