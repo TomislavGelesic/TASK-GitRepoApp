@@ -33,7 +33,7 @@ class RepositoriesResultViewModel {
             .sink(receiveValue: { [unowned self] (result) in
                 switch result {
                 case .success(let response):
-                    let data = response.items.map{RepositoryDomainItem($0)}
+                    self.screenData = response.items.map{RepositoryDomainItem($0)}
                     if self.screenData.isEmpty { self.viewControllerDelegate?.showEmptyTableViewBackgroundLabel(true) }
                     else { self.viewControllerDelegate?.showEmptyTableViewBackgroundLabel(false) }
                     self.updateUISubject.send()

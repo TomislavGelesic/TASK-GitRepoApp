@@ -10,11 +10,11 @@ class UsersResultsViewController: UIViewController {
         let label = UILabel()
         label.textAlignment = .center
         label.text = "Search match not found.."
-        label.textColor = .white
+        label.textColor = .init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0)
         let tableView = UITableView()
         tableView.backgroundView = label
         tableView.separatorStyle = .none
-        tableView.backgroundColor = .gray
+        tableView.backgroundColor = .white
         tableView.register(UsersResultTableViewCell.self, forCellReuseIdentifier: UsersResultTableViewCell.reuseIdentifier)
         return tableView
     }()

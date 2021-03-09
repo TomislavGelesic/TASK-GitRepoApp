@@ -10,13 +10,12 @@ class RepositoriesResultsViewController: UIViewController {
         let label = UILabel()
         label.textAlignment = .center
         label.text = "Search match not found.."
-        label.textColor = .white
+        label.textColor = .init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0)
         let tableView = UITableView()
         tableView.backgroundView = label
         tableView.separatorStyle = .none
-        tableView.backgroundColor = .gray
-        tableView.register(RepositoriesResultsTableViewCell.self,
-                           forCellReuseIdentifier: RepositoriesResultsTableViewCell.reuseIdentifier)
+        tableView.backgroundColor = .white
+        tableView.register(RepositoriesResultsTableViewCell.self, forCellReuseIdentifier: RepositoriesResultsTableViewCell.reuseIdentifier)
         return tableView
     }()
     
