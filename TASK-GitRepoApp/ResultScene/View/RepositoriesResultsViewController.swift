@@ -35,6 +35,10 @@ class RepositoriesResultsViewController: UIViewController {
         showSpinner()
         viewModel.searchSubject.send(viewModel.searchQuery)
     }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        navigationItem.title = ""
+    }
 }
 
 extension RepositoriesResultsViewController {

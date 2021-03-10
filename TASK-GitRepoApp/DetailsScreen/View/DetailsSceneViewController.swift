@@ -25,6 +25,10 @@ class DetailsSceneViewController: UIViewController {
         setConstraintsWebView()
         viewModel.showWebPage()
     }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        navigationItem.title = ""
+    }
 }
 
 extension DetailsSceneViewController {

@@ -67,6 +67,10 @@ class SearchViewController: UIViewController {
         setConstraints()
         setSubscribers()
     }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        navigationItem.title = ""
+    }
 }
 
 extension SearchViewController {

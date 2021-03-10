@@ -35,6 +35,10 @@ class ResultSceneViewControllerWrapper: UIViewController {
         setupNavigationBar()
         setupViews()
     }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        navigationItem.title = ""
+    }
 }
 
 extension ResultSceneViewControllerWrapper {
@@ -43,12 +47,6 @@ extension ResultSceneViewControllerWrapper {
         navigationController?.navigationBar.backIndicatorImage = UIImage(systemName: "arrow.left")?.withTintColor(.black)
         navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(systemName: "arrow.left")?.withTintColor(.black)
         navigationItem.titleView = searchTextField
-        if let a = navigationItem.backBarButtonItem {
-            print("okoko")
-        }
-        else {
-            print("nononon")
-        }
     }
     
     @objc func searchDidChange() {

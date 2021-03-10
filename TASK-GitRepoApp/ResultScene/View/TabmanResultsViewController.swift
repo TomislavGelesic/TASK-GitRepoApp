@@ -27,11 +27,9 @@ class TabmanResultsViewController: TabmanViewController {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = false
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        dismiss(animated: true, completion: nil)
-        navigationController?.navigationBar.isHidden = false
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        navigationItem.title = ""
     }
 }
 
