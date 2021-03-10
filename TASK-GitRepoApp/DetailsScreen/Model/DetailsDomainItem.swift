@@ -6,7 +6,7 @@ struct DetailsDomainItem {
     var title: String
     var webPagePath: String
     
-    init(title: String, webPagePath: String) {
+    init(title: String = "", webPagePath: String = "") {
         self.title = title
         self.webPagePath = webPagePath
     }

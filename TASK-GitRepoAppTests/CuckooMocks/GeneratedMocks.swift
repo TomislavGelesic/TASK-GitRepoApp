@@ -1,4 +1,4 @@
-// MARK: - Mocks generated from file: TASK-GitRepoApp/ResultScene/Coordinators/ResultSceneCoordinator.swift at 2021-03-10 13:28:45 +0000
+// MARK: - Mocks generated from file: TASK-GitRepoApp/ResultScene/Coordinators/ResultSceneCoordinator.swift at 2021-03-10 14:40:28 +0000
 
 
 import Cuckoo
@@ -349,7 +349,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: TASK-GitRepoApp/ResultScene/Model/RepositoriesResultRepositoryImpl.swift at 2021-03-10 13:28:45 +0000
+// MARK: - Mocks generated from file: TASK-GitRepoApp/ResultScene/Model/RepositoriesResultRepositoryImpl.swift at 2021-03-10 14:40:28 +0000
 
 
 import Cuckoo
@@ -449,7 +449,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: TASK-GitRepoApp/ResultScene/Model/UserResultRepositoryImpl.swift at 2021-03-10 13:28:45 +0000
+// MARK: - Mocks generated from file: TASK-GitRepoApp/ResultScene/Model/UserResultRepositoryImpl.swift at 2021-03-10 14:40:28 +0000
 
 
 import Cuckoo

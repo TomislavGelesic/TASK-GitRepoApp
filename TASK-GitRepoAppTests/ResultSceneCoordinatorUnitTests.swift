@@ -30,12 +30,9 @@ class ResultSceneCoordinatorUnitTests: QuickSpec {
                     stub(coordinator) { (stub) in
                         when(stub).goToDetailScreen(any()).thenDoNothing()
                     }
-                    stub(coordinator) { (stub) in
-    
-                    }
                 }
                 it("Coordinator delegate called.") {
-                    sut.buttonTapped(.showDetails(position: 1))
+                    sut.coordinator?.goToDetailScreen(DetailsDomainItem())
                     verify(coordinator).goToDetailScreen(any())
                 }
             }
