@@ -4,7 +4,7 @@ import Combine
 
 class SearchViewModel {
     
-    var coordinatorDelegate: CoordinatorDelegate?
+    var coordinator: CoordinatorDelegate?
     var selectedOptions: [FilterOption] = [.repositories]
     var updateFilterLabelSubject = CurrentValueSubject<Int, Never>(1)
     
@@ -14,13 +14,13 @@ class SearchViewModel {
     
     func searchButtonTapped(for searchQuery: String) {
         if selectedOptions.contains(.repositories), selectedOptions.contains(.users) {
-            coordinatorDelegate?.viewControllerHasFinished(goTo: .resultScene(option: .usersAndRepositories(search: searchQuery)))
+            coordinator?.goToResultScene(.usersAndRepositories(search: searchQuery))
         }
         else if selectedOptions.contains(.repositories) {
-            coordinatorDelegate?.viewControllerHasFinished(goTo: .resultScene(option: .repositories(search: searchQuery)))
+            coordinator?.goToResultScene(.repositories(search: searchQuery))
         }
         else {
-            coordinatorDelegate?.viewControllerHasFinished(goTo: .resultScene(option: .users(search: searchQuery)))
+            coordinator?.goToResultScene(.users(search: searchQuery))
         }
     }
     
@@ -37,6 +37,7 @@ class SearchViewModel {
 }
 
 extension SearchViewModel: FilterViewModelDelegate {
+    
     func updateFilterSelection(_ selectedOptions: [FilterOption]) {
         self.selectedOptions = selectedOptions
         updateFilterLabelSubject.send(selectedOptions.count)

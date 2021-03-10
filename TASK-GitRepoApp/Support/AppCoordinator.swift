@@ -1,3 +1,4 @@
+
 import UIKit
 
 class AppCoordinator: Coordinator {
@@ -18,59 +19,36 @@ class AppCoordinator: Coordinator {
     }
     
     deinit { print("AppCoordinator deinit called.") }
-
+    
     func start() { goToSearchScene() }
-
-    func childDidFinish(_ coordinator: Coordinator, next: SceneOption) {
-        switch next {
-        case .detailScene(let info):
-            childCoordinators = childCoordinators.filter({ (coord) -> Bool in
-                if let _ = coordinator as? SearchSceneCoordinator, coordinator === coord { return true }
-                else { return false }
-            })
-            goToDetailScreen(info)
-        case .resultScene(let option):
-                childCoordinators = childCoordinators.filter({ (coord) -> Bool in
-                    if let _ = coordinator as? SearchSceneCoordinator, coordinator === coord { return true }
-                    else { return false }
-                })
-            goToResultScene(option)
-        case .searchScene:
-            childCoordinators = childCoordinators.filter({ (coord) -> Bool in
-                if let _ = coordinator as? SearchSceneCoordinator, coordinator === coord  { return true }
-                else { return false }
-            })
-        case .browserScene:
-            childCoordinators = childCoordinators.filter({ (coord) -> Bool in
-                if let _ = coordinator as? SearchSceneCoordinator, coordinator === coord { return true }
-                else { return false }
-            })
-            goToBrowserScene()
+    
+    func childDidFinish(_ coordinator: CoordinatorDelegate?) {
+        for (index, item) in childCoordinators.enumerated() {
+            if item === coordinator {
+                childCoordinators.remove(at: index)
+                break
+            }
         }
     }
-
+    
     func goToSearchScene(){
         let child = SearchSceneCoordinator(navigationController: navigationController)
-        child.delegate = self
+        child.coordinatorDelegate = self
         child.start()
     }
-
+    
     func goToResultScene(_ option: ResultSceneOption) {
         let child = ResultSceneCoordinator(navigationController: navigationController)
-        child.delegate = self
+        child.coordinatorDelegate = self
         childCoordinators.append(child)
         child.start(option)
     }
     
     func goToDetailScreen(_ info: DetailsDomainItem) {
-        let child = DetailsScreenCoordinator(navigationController: navigationController)
-        child.delegate = self
+        let child = DetailsSceneCoordinator(navigationController: navigationController)
+        child.coordinatorDelegate = self
         childCoordinators.append(child)
         child.start(with: info)
-    }
-    
-    func goToBrowserScene() {
-        
     }
 }
 

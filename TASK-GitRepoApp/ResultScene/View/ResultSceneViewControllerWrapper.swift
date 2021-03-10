@@ -23,11 +23,11 @@ class ResultSceneViewControllerWrapper: UIViewController {
     
     var rootViewController: UIViewController
     
-    init(rootViewController: UIViewController) {
+    init(_ rootViewController: UIViewController) {
         self.rootViewController = rootViewController
         super.init(nibName: nil, bundle: nil)
     }
-    
+    deinit { print("ResultSceneViewControllerWrapper deinit called") }
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
     
     override func viewDidLoad() {
@@ -35,14 +35,10 @@ class ResultSceneViewControllerWrapper: UIViewController {
         setupNavigationBar()
         setupViews()
     }
-
 }
 
 extension ResultSceneViewControllerWrapper {
     func setupNavigationBar() {
-        searchTextField.delegate = self
-        searchTextField.addTarget(self, action: #selector(searchDidChange), for: .allEditingEvents)
-        
         navigationController?.navigationBar.isHidden = false
         navigationController?.navigationBar.backIndicatorImage = UIImage(systemName: "arrow.left")?.withTintColor(.black)
         navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(systemName: "arrow.left")?.withTintColor(.black)
@@ -65,6 +61,8 @@ extension ResultSceneViewControllerWrapper {
     }
     
     func setupViews() {
+        searchTextField.delegate = self
+        searchTextField.addTarget(self, action: #selector(searchDidChange), for: .allEditingEvents)
         view.addSubview(rootViewController.view)
         rootViewController.view.snp.makeConstraints { (make) in
             make.edges.equalTo(view.safeAreaLayoutGuide)

@@ -34,10 +34,8 @@ class ResultSceneTests: QuickSpec {
             context("Good screen data initialize success screen") {
                 it("Success screen initialized.") {
                     let expected: String = "TechnologyClassroom"
-                    var t = [UserDomainItem]()
                     stub(userRepositoryMock) { [unowned self] stub in
                         if let data: UserResponse = self.getLocalResource("UserResponseJSON") {
-                            t = data.items.map{ UserDomainItem($0)}
                             let publisher = Just(Result<UserResponse, RestManagerError>.success(data)).eraseToAnyPublisher()
                             when(stub).fetch(matching: any()).thenReturn(publisher)
                         }
@@ -45,8 +43,6 @@ class ResultSceneTests: QuickSpec {
                     usersViewModel = UsersResultViewModel(query: "", repository: userRepositoryMock)
                     usersViewModel.initializeSearchSubject(subject: usersViewModel.searchSubject.eraseToAnyPublisher()).store(in: &disposeBag)
                     usersViewModel.searchSubject.send("")
-                    
-                    while true { }
                     expect(usersViewModel.screenData[1].authorName).toEventually(equal(expected))
                 }
             }
@@ -98,7 +94,7 @@ class ResultSceneTests: QuickSpec {
                         let publisher = Just(Result<RepositoryResponse, RestManagerError>.failure(.decodingError)).eraseToAnyPublisher()
                         when(stub).fetch(matching: any()).thenReturn(publisher)
                     }
-                    repositoriesViewModel.initializeSearchSubject(subject: usersViewModel.searchSubject.eraseToAnyPublisher())
+                    repositoriesViewModel.initializeSearchSubject(subject: repositoriesViewModel.searchSubject.eraseToAnyPublisher())
                         .store(in: &disposeBag)
                     repositoriesViewModel.alertSubject
                         .subscribe(on: DispatchQueue.global(qos: .background))
@@ -124,7 +120,4 @@ class ResultSceneTests: QuickSpec {
             }
         }
     }
-    
-    #warning("commit/push difficulites, delete this")
-    // blblblblbl
 }

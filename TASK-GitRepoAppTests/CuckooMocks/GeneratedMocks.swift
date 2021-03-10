@@ -1,11 +1,5 @@
-// MARK: - Mocks generated from file: TASK-GitRepoApp/ResultScene/Coordinators/ResultSceneCoordinator.swift at 2021-03-05 12:24:44 +0000
+// MARK: - Mocks generated from file: TASK-GitRepoApp/ResultScene/Coordinators/ResultSceneCoordinator.swift at 2021-03-09 18:28:14 +0000
 
-//
-//  ResultSceneCoordinator.swift
-//  TASK-GitRepoApp
-//
-//  Created by Tomislav Gelesic on 02.03.2021..
-//
 
 import Cuckoo
 @testable import TASK_GitRepoApp
@@ -295,7 +289,7 @@ import UIKit
 }
 
 
-// MARK: - Mocks generated from file: TASK-GitRepoApp/ResultScene/Model/RepositoriesResultRepositoryImpl.swift at 2021-03-05 12:24:44 +0000
+// MARK: - Mocks generated from file: TASK-GitRepoApp/ResultScene/Model/RepositoriesResultRepositoryImpl.swift at 2021-03-09 18:28:14 +0000
 
 
 import Cuckoo
@@ -395,7 +389,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: TASK-GitRepoApp/ResultScene/Model/UserResultRepositoryImpl.swift at 2021-03-05 12:24:44 +0000
+// MARK: - Mocks generated from file: TASK-GitRepoApp/ResultScene/Model/UserResultRepositoryImpl.swift at 2021-03-09 18:28:14 +0000
 
 
 import Cuckoo

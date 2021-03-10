@@ -5,7 +5,7 @@ import Combine
 class RepositoriesResultViewModel {
     
     weak var viewControllerDelegate: RepositoriesResultsViewController?
-    var coordinatorDelegate: CoordinatorDelegate?
+    var coordinator: CoordinatorDelegate?
     var screenData = [RepositoryDomainItem]()
     var repository: RepositoriesResultRepositoryImpl
     var searchQuery: String
@@ -55,12 +55,10 @@ class RepositoriesResultViewModel {
     
     func buttonTapped(_ type: ResultButtonType) {
         switch type {
-        case .back:
-            coordinatorDelegate?.viewControllerHasFinished(goTo: .searchScene)
         case .openInBrowser(position: let position):
             openUrlInBrowser(screenData[position].webPagePath)
         case .showDetails(position: let position):
-            coordinatorDelegate?.viewControllerHasFinished(goTo: .detailScene(info: DetailsDomainItem(screenData[position])))
+            coordinator?.goToDetailScreen(DetailsDomainItem(screenData[position]))
         }
     }
     

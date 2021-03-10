@@ -3,15 +3,15 @@ import UIKit
 import SnapKit
 import WebKit
 
-class DetailsScreenViewController: UIViewController {
+class DetailsSceneViewController: UIViewController {
     
-    var viewModel: DetailsScreenViewModel
+    var viewModel: DetailsSceneViewModel
     let webView: WKWebView = {
         let view = WKWebView(frame: .zero, configuration: WKWebViewConfiguration())
         return view
     }()
     
-    init(viewModel: DetailsScreenViewModel) {
+    init(viewModel: DetailsSceneViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -23,41 +23,25 @@ class DetailsScreenViewController: UIViewController {
         setupNavigationBar()
         setupViews()
         setConstraintsWebView()
-        showWebPage()
+        viewModel.showWebPage()
     }
 }
 
-extension DetailsScreenViewController {
+extension DetailsSceneViewController {
     func setupNavigationBar() {
-        let backButton: UIBarButtonItem = {
-            let buttonImage = UIImage(systemName: "arrow.left")
-            let button = UIBarButtonItem(image: buttonImage, style: .plain, target: self, action: #selector(backTapped))
-            button.tintColor = .black
-            return button
-        }()
-        navigationController?.navigationBar.isHidden = false
-        navigationItem.setLeftBarButton(backButton, animated: true)
-        navigationController?.navigationBar.tintColor = .init(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)
         navigationItem.title = viewModel.screenData.title
     }
     func setupViews() {
+        viewModel.viewControllerDelegate = self
         webView.uiDelegate = self
         webView.navigationDelegate = self
         view.addSubview(webView)
     }
-    @objc func backTapped() { viewModel.backButtonTapped() }
-    
-    func showWebPage() {
-        if let validURL = URL(string: viewModel.screenData.webPagePath),
-           UIApplication.shared.canOpenURL(validURL) {
-            webView.load(URLRequest(url: validURL))
-        }
-    }
 }
 
-extension DetailsScreenViewController: WKUIDelegate { }
+extension DetailsSceneViewController: WKUIDelegate { }
 
-extension DetailsScreenViewController: WKNavigationDelegate {
+extension DetailsSceneViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         showAlert(text: "Couldn't access server to get data.") { [unowned self] in
             self.showSpinner()
@@ -66,8 +50,7 @@ extension DetailsScreenViewController: WKNavigationDelegate {
     }
 }
 
-
-extension DetailsScreenViewController {
+extension DetailsSceneViewController {
     //MARK: CONSTRAINTS BELOW
     func setConstraintsWebView() {
         webView.snp.makeConstraints { (make) in make.edges.equalTo(view.safeAreaLayoutGuide) }

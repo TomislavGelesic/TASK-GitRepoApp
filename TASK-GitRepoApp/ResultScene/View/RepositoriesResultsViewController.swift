@@ -35,13 +35,6 @@ class RepositoriesResultsViewController: UIViewController {
         showSpinner()
         viewModel.searchSubject.send(viewModel.searchQuery)
     }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        if isMovingFromParent {
-//            viewModel.coordinatorDelegate?.viewControllerHasFinished()
-        }
-    }
 }
 
 extension RepositoriesResultsViewController {

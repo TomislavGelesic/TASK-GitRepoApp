@@ -6,7 +6,7 @@ import Alamofire
 class UsersResultViewModel {
     
     weak var viewControllerDelegate: UsersResultsViewController?
-    var coordinatorDelegate: CoordinatorDelegate?
+    var coordinator: CoordinatorDelegate?
     var screenData = [UserDomainItem]()
     var searchQuery: String
     var repository: UserResultRepositoryImpl
@@ -56,12 +56,10 @@ class UsersResultViewModel {
     
     func buttonTapped(_ type: ResultButtonType) {
         switch type {
-        case .back:
-            coordinatorDelegate?.viewControllerHasFinished(goTo: .searchScene)
         case .openInBrowser(position: let position):
             openUrlInBrowser(screenData[position].webPagePath)
         case .showDetails(position: let position):
-            coordinatorDelegate?.viewControllerHasFinished(goTo: .detailScene(info: DetailsDomainItem(screenData[position])))
+            coordinator?.goToDetailScreen(DetailsDomainItem(screenData[position]))
         }
     }
     
