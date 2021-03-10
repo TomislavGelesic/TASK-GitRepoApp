@@ -26,7 +26,6 @@ class UserResultSceneInitializationUnitTests: QuickSpec {
         describe("UNIT-TEST UserResultSceneInitialization") {
             context("Good screen data initialize success screen") {
                 beforeEach {
-                    let expected: String = "TechnologyClassroom"
                     sut = UsersResultViewModel(query: "", repository: mock)
                     sut.initializeSearchSubject(subject: sut.searchSubject.eraseToAnyPublisher())
                         .store(in: &disposeBag)

@@ -16,6 +16,7 @@ class AppCoordinator: Coordinator {
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         self.navigationController = navigationController
+
     }
     
     deinit { print("AppCoordinator deinit called.") }

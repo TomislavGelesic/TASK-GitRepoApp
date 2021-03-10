@@ -18,22 +18,27 @@ class ResultSceneCoordinatorUnitTests: QuickSpec {
     
     override func spec() {
         var disposeBag = Set<AnyCancellable>()
-        let userRepositoryMock = MockUserResultRepositoryImpl()
-        var usersViewModel: UsersResultViewModel!
+        let mock = MockUserResultRepositoryImpl()
+        var sut: UsersResultViewModel!
         let coordinator = MockResultSceneCoordinator(navigationController: UINavigationController())
         
         describe("UNIT-TEST Coordinator") {
-//            context(" button tap call coordinator delegate.") {
-//                it("Coordinator delegate called.") {
-//                    stub(coordinator) { (stub) in
-//                        when()
-//                    }
-//                    usersViewModel = UsersResultViewModel(query: "", repository: userRepositoryMock)
-//                    usersViewModel.coordinator = coordinator
-//                    usersViewModel.buttonTapped(.)
-//                    verify(coordinator).viewControllerHasFinished(goTo: any())
-//                }
-//            }
+            context(" button tap call coordinator delegate.") {
+                beforeEach {
+                    sut = UsersResultViewModel(query: "", repository: mock)
+                    sut.coordinator = coordinator
+                    stub(coordinator) { (stub) in
+                        when(stub).goToDetailScreen(any()).thenDoNothing()
+                    }
+                    stub(coordinator) { (stub) in
+    
+                    }
+                }
+                it("Coordinator delegate called.") {
+                    sut.buttonTapped(.showDetails(position: 1))
+                    verify(coordinator).goToDetailScreen(any())
+                }
+            }
         }
     }
 }
