@@ -43,6 +43,7 @@ extension TabmanResultsViewController: PageboyViewControllerDataSource, TMBarDat
             button.selectedTintColor = .init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0)
         }
         bar.indicator.tintColor = .init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0)
+        bar.backgroundColor = .gray
         addBar(bar, dataSource: self, at: .top)
     }
     func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {

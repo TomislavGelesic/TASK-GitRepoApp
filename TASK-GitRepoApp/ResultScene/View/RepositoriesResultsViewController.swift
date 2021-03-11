@@ -33,7 +33,6 @@ class RepositoriesResultsViewController: UIViewController {
         setConstraintsTableView()
         setupSubscribers()
         showSpinner()
-        viewModel.searchSubject.send(viewModel.searchQuery)
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)

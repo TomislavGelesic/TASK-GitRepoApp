@@ -4,6 +4,7 @@ import Combine
 
 class SearchViewModel {
     
+    weak var viewControllerDelegate: SearchViewController?
     var coordinator: CoordinatorDelegate?
     var selectedOptions: [FilterOption] = [.repositories]
     var updateFilterLabelSubject = CurrentValueSubject<Int, Never>(1)
@@ -12,15 +13,23 @@ class SearchViewModel {
         print("SearchViewModel deinit called.")
     }
     
-    func searchButtonTapped(for searchQuery: String) {
-        if selectedOptions.contains(.repositories), selectedOptions.contains(.users) {
-            coordinator?.goToResultScene(.usersAndRepositories(search: searchQuery))
-        }
-        else if selectedOptions.contains(.repositories) {
-            coordinator?.goToResultScene(.repositories(search: searchQuery))
-        }
-        else {
-            coordinator?.goToResultScene(.users(search: searchQuery))
+    func searchTextChanged(_ text: String?) {
+        if let validText = text,
+           validText.count >= 2 { viewControllerDelegate?.enableSearch(true) }
+        else { viewControllerDelegate?.enableSearch(false) }
+    }
+    
+    func searchButtonTapped(for text: String?) {
+        if let query = text {
+            if selectedOptions.contains(.repositories), selectedOptions.contains(.users) {
+                coordinator?.goToResultScene(.usersAndRepositories(search: query))
+            }
+            else if selectedOptions.contains(.repositories) {
+                coordinator?.goToResultScene(.repositories(search: query))
+            }
+            else {
+                coordinator?.goToResultScene(.users(search: query))
+            }
         }
     }
     

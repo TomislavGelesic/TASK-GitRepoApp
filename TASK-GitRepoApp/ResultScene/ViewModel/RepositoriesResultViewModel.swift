@@ -8,30 +8,27 @@ class RepositoriesResultViewModel {
     var coordinator: CoordinatorDelegate?
     var screenData = [RepositoryDomainItem]()
     var repository: RepositoriesResultRepositoryImpl
-    var searchQuery: String
     let spinnerSubject = PassthroughSubject<Bool, Never>()
     let alertSubject = PassthroughSubject<String, Never>()
-    let searchSubject = PassthroughSubject<String, Never>()
+    let searchSubject: CurrentValueSubject<String, Never>
     let updateUISubject = PassthroughSubject<Void, Never>()
     
     init(query: String, repository: RepositoriesResultRepositoryImpl) {
         self.repository = repository
-        self.searchQuery = query
+        self.searchSubject = CurrentValueSubject<String, Never>(query)
     }
     deinit { print("RepositoriesResultViewModel deinit called.") }
     
     func initializeSearchSubject(subject: AnyPublisher<String, Never>) -> AnyCancellable {
         return subject
-//            .debounce(for: .seconds(0.5), scheduler: DispatchQueue.global())
-//            .removeDuplicates()
+            .debounce(for: .seconds(0.5), scheduler: DispatchQueue.global())
+            .removeDuplicates()
             .flatMap({ [unowned self] (query) -> AnyPublisher<Result<RepositoryResponse, RestManagerError>, Never> in
                 return repository.fetch(matching: query)
             })
             .subscribe(on: DispatchQueue.global(qos: .background))
             .receive(on: RunLoop.main)
             .sink(receiveValue: { [unowned self] (result) in
-                #warning("print delete")
-                print("okokokookokokokok")
                 switch result {
                 case .success(let response):
                     self.screenData = response.items.map{RepositoryDomainItem($0)}

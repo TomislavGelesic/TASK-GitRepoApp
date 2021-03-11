@@ -46,8 +46,7 @@ extension ResultSceneViewControllerWrapper {
         navigationController?.navigationBar.isHidden = false
         navigationController?.navigationBar.backIndicatorImage = UIImage(systemName: "arrow.left")?.withTintColor(.black)
         navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(systemName: "arrow.left")?.withTintColor(.black)
-        navigationItem.titleView = searchTextField
-    }
+        navigationItem.titleView = searchTextField    }
     
     @objc func searchDidChange() {
         if let repoVC = rootViewController as? RepositoriesResultsViewController {

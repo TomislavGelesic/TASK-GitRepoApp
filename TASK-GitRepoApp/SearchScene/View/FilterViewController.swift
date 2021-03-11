@@ -117,6 +117,7 @@ extension FilterViewController {
         usersButton.addTarget(self, action: #selector(usersOptionTapped), for: .touchUpInside)
         userLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(usersOptionTapped)))
         applyButton.addTarget(self, action: #selector(applyButtonTapped), for: .touchUpInside)
+        viewModel.viewControllerDelegate = self
     }
     
     func initializeSubscribers() {
@@ -130,22 +131,24 @@ extension FilterViewController {
         viewModel.enableApplyButtonSubject
             .subscribe(on: DispatchQueue.global(qos: .background))
             .receive(on: RunLoop.main)
-            .sink { [unowned self] (state) in self.updateUserEnabilityForApplyButton(state)}
+            .sink { [unowned self] (state) in self.enableApplyButton(state) }
             .store(in: &disposeBag)
     }
     
-    func updateUserEnabilityForApplyButton(_ state: Bool) {
-        if state {
+    func enableApplyButton(_ should: Bool) {
+        if should {
             applyButton.layer.borderColor = CGColor.init(red: 0.0, green: 0.0, blue: 0.0, alpha: 1)
             applyButton.isEnabled = true
             applyButton.backgroundColor = .white
             applyButton.isEnabled = true
+            applyButton.addShadow(color: .black)
         }
         else {
             applyButton.layer.borderColor = CGColor.init(red: 1.0, green: 1.0, blue: 1.0, alpha: 1)
             applyButton.isEnabled = false
             applyButton.backgroundColor = .lightGray
             applyButton.isEnabled = false
+            applyButton.removeShadow()
         }
     }
     

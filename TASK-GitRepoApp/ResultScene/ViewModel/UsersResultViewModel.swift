@@ -8,16 +8,15 @@ class UsersResultViewModel {
     weak var viewControllerDelegate: UsersResultsViewController?
     var coordinator: CoordinatorDelegate?
     var screenData = [UserDomainItem]()
-    var searchQuery: String
     var repository: UserResultRepositoryImpl
     let spinnerSubject = PassthroughSubject<Bool, Never>()
     let alertSubject = PassthroughSubject<String, Never>()
-    let searchSubject = PassthroughSubject<String, Never>()
+    let searchSubject: CurrentValueSubject<String, Never>
     let updateUISubject = PassthroughSubject<Void, Never>()
     
     init(query: String, repository: UserResultRepositoryImpl) {
         self.repository = repository
-        self.searchQuery = query
+        self.searchSubject = CurrentValueSubject<String, Never>(query)
     }
     deinit { print("UsersResultViewModel deinit called.") }
     
