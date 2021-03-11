@@ -1,35 +1,28 @@
 
 import UIKit
 import Combine
-import Alamofire
 
 class RepositoriesResultViewModel {
     
-    var coordinatorDelegate: CoordinatorDelegate?
-    var shouldGetFilteredScreenData: Bool = false
-    var filteredScreenData: [RepositoryDomainItem] = .init()
+    weak var viewControllerDelegate: RepositoriesResultsViewController?
+    var coordinator: CoordinatorDelegate?
     var screenData = [RepositoryDomainItem]()
     var repository: RepositoriesResultRepositoryImpl
-    var searchQuery: String
     let spinnerSubject = PassthroughSubject<Bool, Never>()
     let alertSubject = PassthroughSubject<String, Never>()
-    let searchSubject = PassthroughSubject<String, Never>()
+    let searchSubject: CurrentValueSubject<String, Never>
     let updateUISubject = PassthroughSubject<Void, Never>()
     
     init(query: String, repository: RepositoriesResultRepositoryImpl) {
         self.repository = repository
-        self.searchQuery = query
-    }    
+        self.searchSubject = CurrentValueSubject<String, Never>(query)
+    }
     deinit { print("RepositoriesResultViewModel deinit called.") }
     
-    func showFilteredScreenData(query: String) {
-        filteredScreenData = screenData.filter { $0.repositoryName.contains(query) ? true : false }
-        updateUISubject.send()
-    }
-    
     func initializeSearchSubject(subject: AnyPublisher<String, Never>) -> AnyCancellable {
-        
         return subject
+            .debounce(for: .seconds(0.5), scheduler: DispatchQueue.global())
+            .removeDuplicates()
             .flatMap({ [unowned self] (query) -> AnyPublisher<Result<RepositoryResponse, RestManagerError>, Never> in
                 return repository.fetch(matching: query)
             })
@@ -38,8 +31,9 @@ class RepositoriesResultViewModel {
             .sink(receiveValue: { [unowned self] (result) in
                 switch result {
                 case .success(let response):
-                    let data = response.items.map{RepositoryDomainItem($0)}
-                    self.screenData = data
+                    self.screenData = response.items.map{RepositoryDomainItem($0)}
+                    if self.screenData.isEmpty { self.viewControllerDelegate?.showEmptyTableViewBackgroundLabel(true) }
+                    else { self.viewControllerDelegate?.showEmptyTableViewBackgroundLabel(false) }
                     self.updateUISubject.send()
                 case .failure(let error):
                     print(error)
@@ -49,22 +43,26 @@ class RepositoriesResultViewModel {
             })
     }
     
+    func searchInputChanged(_ query: String?) {
+        if let validQuery = query,
+           validQuery.count >= 2 {
+            viewControllerDelegate?.showSpinner()
+            searchSubject.send(validQuery)
+        }
+    }
+    
     func buttonTapped(_ type: ResultButtonType) {
         switch type {
-        case .back:
-            coordinatorDelegate?.viewControllerHasFinished(goTo: .searchScene)
         case .openInBrowser(position: let position):
             openUrlInBrowser(screenData[position].webPagePath)
         case .showDetails(position: let position):
-            coordinatorDelegate?.viewControllerHasFinished(goTo: .detailScene(info: DetailsDomainItem(screenData[position])))
+            coordinator?.goToDetailScreen(DetailsDomainItem(screenData[position]))
         }
-    }    
+    }
     
     func openUrlInBrowser(_ urlString: String) {
         if let url = URL(string: urlString),
-           UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-        }
+           UIApplication.shared.canOpenURL(url) { UIApplication.shared.open(url, options: [:], completionHandler: nil) }
         else { print("Couldn't open URL: '' \(urlString) '' in browser") }
     }
 }

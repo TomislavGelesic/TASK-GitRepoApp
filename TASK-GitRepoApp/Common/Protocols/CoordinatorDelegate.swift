@@ -1,5 +1,8 @@
+
 import UIKit
 
 protocol CoordinatorDelegate: class {
-    func viewControllerHasFinished(goTo option: SceneOption)
+    func goToSearchScene()
+    func goToResultScene(_ option: ResultSceneOption)
+    func goToDetailScreen(_ info: DetailsDomainItem)
 }

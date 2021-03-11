@@ -11,10 +11,10 @@ class RepositoriesResultsTableViewCell: UITableViewCell {
         let view = UIView()
         view.backgroundColor = .white
         view.clipsToBounds = true
-        view.layer.masksToBounds = true
         view.layer.cornerRadius = 5
         view.layer.borderWidth = 2
         view.layer.borderColor = .init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0)
+        view.addShadow(color: .black)
         return view
     }()
 
@@ -49,6 +49,7 @@ class RepositoriesResultsTableViewCell: UITableViewCell {
         button.layer.cornerRadius = 5
         button.layer.borderWidth = 1
         button.layer.borderColor = .init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0)
+        button.addShadow(color: .black)
         return button
     }()
     
@@ -64,6 +65,7 @@ class RepositoriesResultsTableViewCell: UITableViewCell {
         button.layer.cornerRadius = 5
         button.layer.borderWidth = 1
         button.layer.borderColor = .init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0)
+        button.addShadow(color: .black)
         return button
     }()
     
@@ -75,6 +77,9 @@ class RepositoriesResultsTableViewCell: UITableViewCell {
     
     let iconContainer: UIView = {
         let view = UIView()
+        view.clipsToBounds = true
+        view.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
+        view.layer.cornerRadius = 10
         view.backgroundColor = .init(red: 4/5, green: 4/5, blue: 4/5, alpha: 1.0)
         return view
     }()
@@ -124,7 +129,7 @@ class RepositoriesResultsTableViewCell: UITableViewCell {
 extension RepositoriesResultsTableViewCell {
 
     func setupViews() {
-        contentView.backgroundColor = .gray
+        contentView.backgroundColor = .white
         contentView.addSubview(contentSubview)
         contentSubview.addSubviews([
             repositoryNameLabel,

@@ -4,7 +4,8 @@ import Combine
 
 class SearchViewModel {
     
-    var coordinatorDelegate: CoordinatorDelegate?
+    weak var viewControllerDelegate: SearchViewController?
+    var coordinator: CoordinatorDelegate?
     var selectedOptions: [FilterOption] = [.repositories]
     var updateFilterLabelSubject = CurrentValueSubject<Int, Never>(1)
     
@@ -12,15 +13,23 @@ class SearchViewModel {
         print("SearchViewModel deinit called.")
     }
     
-    func searchButtonTapped(for searchQuery: String) {
-        if selectedOptions.contains(.repositories), selectedOptions.contains(.users) {
-            coordinatorDelegate?.viewControllerHasFinished(goTo: .resultScene(option: .usersAndRepositories(search: searchQuery)))
-        }
-        else if selectedOptions.contains(.repositories) {
-            coordinatorDelegate?.viewControllerHasFinished(goTo: .resultScene(option: .repositories(search: searchQuery)))
-        }
-        else {
-            coordinatorDelegate?.viewControllerHasFinished(goTo: .resultScene(option: .users(search: searchQuery)))
+    func searchTextChanged(_ text: String?) {
+        if let validText = text,
+           validText.count >= 2 { viewControllerDelegate?.enableSearch(true) }
+        else { viewControllerDelegate?.enableSearch(false) }
+    }
+    
+    func searchButtonTapped(for text: String?) {
+        if let query = text {
+            if selectedOptions.contains(.repositories), selectedOptions.contains(.users) {
+                coordinator?.goToResultScene(.usersAndRepositories(search: query))
+            }
+            else if selectedOptions.contains(.repositories) {
+                coordinator?.goToResultScene(.repositories(search: query))
+            }
+            else {
+                coordinator?.goToResultScene(.users(search: query))
+            }
         }
     }
     
@@ -37,6 +46,7 @@ class SearchViewModel {
 }
 
 extension SearchViewModel: FilterViewModelDelegate {
+    
     func updateFilterSelection(_ selectedOptions: [FilterOption]) {
         self.selectedOptions = selectedOptions
         updateFilterLabelSubject.send(selectedOptions.count)

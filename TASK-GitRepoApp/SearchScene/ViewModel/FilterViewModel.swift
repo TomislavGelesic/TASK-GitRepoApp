@@ -4,6 +4,7 @@ import Combine
 
 class FilterViewModel {
     
+    var viewControllerDelegate: FilterViewController?
     var delegate: FilterViewModelDelegate?
     var filterOptions: [FilterOption]
     var optionSubject: CurrentValueSubject<[FilterOption], Never>

@@ -7,6 +7,17 @@ class UsersResultTableViewCell: UITableViewCell {
     var openProfileTapped: (()->())?
     var openInBrowserTapped: (()->())?
     
+    let contentSubview: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 5
+        view.layer.borderWidth = 2
+        view.layer.borderColor = .init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0)
+        view.addShadow(color: .black)
+        return view
+    }()
+    
     let authorNameLabel: UILabel = {
         let label = UILabel()
         label.font = label.font.withSize(24)
@@ -15,23 +26,12 @@ class UsersResultTableViewCell: UITableViewCell {
     
     let avatarImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.tintColor = .green
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 15
         imageView.layer.borderWidth = 1
         imageView.layer.borderColor = .init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0)
         return imageView
-    }()
-    
-    let contentSubview: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white
-        view.clipsToBounds = true
-        view.layer.cornerRadius = 5
-        view.layer.borderWidth = 2
-        view.layer.borderColor = .init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0)
-        return view
     }()
     
     let openProfileButton: UIButton = {
@@ -41,10 +41,12 @@ class UsersResultTableViewCell: UITableViewCell {
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.font = button.titleLabel?.font.withSize(12)
         button.setTitleColor(.init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0), for: .normal)
+        button.backgroundColor = .white
         button.clipsToBounds = true
         button.layer.cornerRadius = 5
         button.layer.borderWidth = 1
         button.layer.borderColor = .init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0)
+        button.addShadow(color: .black)
         return button
     }()
     
@@ -55,10 +57,12 @@ class UsersResultTableViewCell: UITableViewCell {
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.font = button.titleLabel?.font.withSize(12)
         button.setTitleColor(.init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0), for: .normal)
+        button.backgroundColor = .white
         button.clipsToBounds = true
         button.layer.cornerRadius = 5
         button.layer.borderWidth = 1
         button.layer.borderColor = .init(red: 0.0, green: 0.0, blue: 0.8, alpha: 1.0)
+        button.addShadow(color: .black)
         return button
     }()
     
@@ -76,7 +80,7 @@ class UsersResultTableViewCell: UITableViewCell {
 extension UsersResultTableViewCell {
     
     func setupViews() {
-        contentView.backgroundColor = .gray
+        contentView.backgroundColor = .white
         contentView.addSubview(contentSubview)
         contentSubview.addSubviews([
             authorNameLabel,

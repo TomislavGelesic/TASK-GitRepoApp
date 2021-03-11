@@ -1,11 +1,5 @@
-// MARK: - Mocks generated from file: TASK-GitRepoApp/ResultScene/Coordinators/ResultSceneCoordinator.swift at 2021-03-05 12:24:44 +0000
+// MARK: - Mocks generated from file: TASK-GitRepoApp/ResultScene/Coordinators/ResultSceneCoordinator.swift at 2021-03-10 14:40:28 +0000
 
-//
-//  ResultSceneCoordinator.swift
-//  TASK-GitRepoApp
-//
-//  Created by Tomislav Gelesic on 02.03.2021..
-//
 
 import Cuckoo
 @testable import TASK_GitRepoApp
@@ -34,24 +28,24 @@ import UIKit
     
     
     
-     override var delegate: AppCoordinator? {
+     override var coordinatorDelegate: AppCoordinator? {
         get {
-            return cuckoo_manager.getter("delegate",
+            return cuckoo_manager.getter("coordinatorDelegate",
                 superclassCall:
                     
-                    super.delegate
+                    super.coordinatorDelegate
                     ,
-                defaultCall: __defaultImplStub!.delegate)
+                defaultCall: __defaultImplStub!.coordinatorDelegate)
         }
         
         set {
-            cuckoo_manager.setter("delegate",
+            cuckoo_manager.setter("coordinatorDelegate",
                 value: newValue,
                 superclassCall:
                     
-                    super.delegate = newValue
+                    super.coordinatorDelegate = newValue
                     ,
-                defaultCall: __defaultImplStub!.delegate = newValue)
+                defaultCall: __defaultImplStub!.coordinatorDelegate = newValue)
         }
         
     }
@@ -140,16 +134,46 @@ import UIKit
     
     
     
-     override func viewControllerHasFinished(goTo option: SceneOption)  {
+     override func goToSearchScene()  {
         
-    return cuckoo_manager.call("viewControllerHasFinished(goTo: SceneOption)",
+    return cuckoo_manager.call("goToSearchScene()",
+            parameters: (),
+            escapingParameters: (),
+            superclassCall:
+                
+                super.goToSearchScene()
+                ,
+            defaultCall: __defaultImplStub!.goToSearchScene())
+        
+    }
+    
+    
+    
+     override func goToResultScene(_ option: ResultSceneOption)  {
+        
+    return cuckoo_manager.call("goToResultScene(_: ResultSceneOption)",
             parameters: (option),
             escapingParameters: (option),
             superclassCall:
                 
-                super.viewControllerHasFinished(goTo: option)
+                super.goToResultScene(option)
                 ,
-            defaultCall: __defaultImplStub!.viewControllerHasFinished(goTo: option))
+            defaultCall: __defaultImplStub!.goToResultScene(option))
+        
+    }
+    
+    
+    
+     override func goToDetailScreen(_ info: DetailsDomainItem)  {
+        
+    return cuckoo_manager.call("goToDetailScreen(_: DetailsDomainItem)",
+            parameters: (info),
+            escapingParameters: (info),
+            superclassCall:
+                
+                super.goToDetailScreen(info)
+                ,
+            defaultCall: __defaultImplStub!.goToDetailScreen(info))
         
     }
     
@@ -162,8 +186,8 @@ import UIKit
 	    }
 	    
 	    
-	    var delegate: Cuckoo.ClassToBeStubbedOptionalProperty<MockResultSceneCoordinator, AppCoordinator> {
-	        return .init(manager: cuckoo_manager, name: "delegate")
+	    var coordinatorDelegate: Cuckoo.ClassToBeStubbedOptionalProperty<MockResultSceneCoordinator, AppCoordinator> {
+	        return .init(manager: cuckoo_manager, name: "coordinatorDelegate")
 	    }
 	    
 	    
@@ -187,9 +211,19 @@ import UIKit
 	        return .init(stub: cuckoo_manager.createStub(for: MockResultSceneCoordinator.self, method: "start(_: ResultSceneOption)", parameterMatchers: matchers))
 	    }
 	    
-	    func viewControllerHasFinished<M1: Cuckoo.Matchable>(goTo option: M1) -> Cuckoo.ClassStubNoReturnFunction<(SceneOption)> where M1.MatchedType == SceneOption {
-	        let matchers: [Cuckoo.ParameterMatcher<(SceneOption)>] = [wrap(matchable: option) { $0 }]
-	        return .init(stub: cuckoo_manager.createStub(for: MockResultSceneCoordinator.self, method: "viewControllerHasFinished(goTo: SceneOption)", parameterMatchers: matchers))
+	    func goToSearchScene() -> Cuckoo.ClassStubNoReturnFunction<()> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return .init(stub: cuckoo_manager.createStub(for: MockResultSceneCoordinator.self, method: "goToSearchScene()", parameterMatchers: matchers))
+	    }
+	    
+	    func goToResultScene<M1: Cuckoo.Matchable>(_ option: M1) -> Cuckoo.ClassStubNoReturnFunction<(ResultSceneOption)> where M1.MatchedType == ResultSceneOption {
+	        let matchers: [Cuckoo.ParameterMatcher<(ResultSceneOption)>] = [wrap(matchable: option) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockResultSceneCoordinator.self, method: "goToResultScene(_: ResultSceneOption)", parameterMatchers: matchers))
+	    }
+	    
+	    func goToDetailScreen<M1: Cuckoo.Matchable>(_ info: M1) -> Cuckoo.ClassStubNoReturnFunction<(DetailsDomainItem)> where M1.MatchedType == DetailsDomainItem {
+	        let matchers: [Cuckoo.ParameterMatcher<(DetailsDomainItem)>] = [wrap(matchable: info) { $0 }]
+	        return .init(stub: cuckoo_manager.createStub(for: MockResultSceneCoordinator.self, method: "goToDetailScreen(_: DetailsDomainItem)", parameterMatchers: matchers))
 	    }
 	    
 	}
@@ -207,8 +241,8 @@ import UIKit
 	
 	    
 	    
-	    var delegate: Cuckoo.VerifyOptionalProperty<AppCoordinator> {
-	        return .init(manager: cuckoo_manager, name: "delegate", callMatcher: callMatcher, sourceLocation: sourceLocation)
+	    var coordinatorDelegate: Cuckoo.VerifyOptionalProperty<AppCoordinator> {
+	        return .init(manager: cuckoo_manager, name: "coordinatorDelegate", callMatcher: callMatcher, sourceLocation: sourceLocation)
 	    }
 	    
 	    
@@ -236,9 +270,21 @@ import UIKit
 	    }
 	    
 	    @discardableResult
-	    func viewControllerHasFinished<M1: Cuckoo.Matchable>(goTo option: M1) -> Cuckoo.__DoNotUse<(SceneOption), Void> where M1.MatchedType == SceneOption {
-	        let matchers: [Cuckoo.ParameterMatcher<(SceneOption)>] = [wrap(matchable: option) { $0 }]
-	        return cuckoo_manager.verify("viewControllerHasFinished(goTo: SceneOption)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    func goToSearchScene() -> Cuckoo.__DoNotUse<(), Void> {
+	        let matchers: [Cuckoo.ParameterMatcher<Void>] = []
+	        return cuckoo_manager.verify("goToSearchScene()", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func goToResultScene<M1: Cuckoo.Matchable>(_ option: M1) -> Cuckoo.__DoNotUse<(ResultSceneOption), Void> where M1.MatchedType == ResultSceneOption {
+	        let matchers: [Cuckoo.ParameterMatcher<(ResultSceneOption)>] = [wrap(matchable: option) { $0 }]
+	        return cuckoo_manager.verify("goToResultScene(_: ResultSceneOption)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
+	    }
+	    
+	    @discardableResult
+	    func goToDetailScreen<M1: Cuckoo.Matchable>(_ info: M1) -> Cuckoo.__DoNotUse<(DetailsDomainItem), Void> where M1.MatchedType == DetailsDomainItem {
+	        let matchers: [Cuckoo.ParameterMatcher<(DetailsDomainItem)>] = [wrap(matchable: info) { $0 }]
+	        return cuckoo_manager.verify("goToDetailScreen(_: DetailsDomainItem)", callMatcher: callMatcher, parameterMatchers: matchers, sourceLocation: sourceLocation)
 	    }
 	    
 	}
@@ -247,7 +293,7 @@ import UIKit
  class ResultSceneCoordinatorStub: ResultSceneCoordinator {
     
     
-     override var delegate: AppCoordinator? {
+     override var coordinatorDelegate: AppCoordinator? {
         get {
             return DefaultValueRegistry.defaultValue(for: (AppCoordinator?).self)
         }
@@ -288,14 +334,22 @@ import UIKit
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
-     override func viewControllerHasFinished(goTo option: SceneOption)   {
+     override func goToSearchScene()   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+     override func goToResultScene(_ option: ResultSceneOption)   {
+        return DefaultValueRegistry.defaultValue(for: (Void).self)
+    }
+    
+     override func goToDetailScreen(_ info: DetailsDomainItem)   {
         return DefaultValueRegistry.defaultValue(for: (Void).self)
     }
     
 }
 
 
-// MARK: - Mocks generated from file: TASK-GitRepoApp/ResultScene/Model/RepositoriesResultRepositoryImpl.swift at 2021-03-05 12:24:44 +0000
+// MARK: - Mocks generated from file: TASK-GitRepoApp/ResultScene/Model/RepositoriesResultRepositoryImpl.swift at 2021-03-10 14:40:28 +0000
 
 
 import Cuckoo
@@ -395,7 +449,7 @@ import Foundation
 }
 
 
-// MARK: - Mocks generated from file: TASK-GitRepoApp/ResultScene/Model/UserResultRepositoryImpl.swift at 2021-03-05 12:24:44 +0000
+// MARK: - Mocks generated from file: TASK-GitRepoApp/ResultScene/Model/UserResultRepositoryImpl.swift at 2021-03-10 14:40:28 +0000
 
 
 import Cuckoo

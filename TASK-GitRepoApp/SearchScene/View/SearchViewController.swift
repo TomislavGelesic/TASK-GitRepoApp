@@ -17,7 +17,7 @@ class SearchViewController: UIViewController {
     let searchTextField: UITextField = {
         let img = UIImage(systemName: "magnifyingglass", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20.0))
         let iconView = UIImageView(image: img?.withRenderingMode(.alwaysTemplate))
-        iconView.tintColor = .lightGray
+        iconView.tintColor = .black
         let placeholderView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 10.0, height: 10.0))
         let textField = UITextField()
         textField.rightView = placeholderView
@@ -25,8 +25,10 @@ class SearchViewController: UIViewController {
         textField.leftView = iconView
         textField.leftViewMode = .always
         textField.placeholder = "Search"
+        textField.layer.masksToBounds = false
         textField.layer.borderWidth = 1
-        textField.layer.borderColor = CGColor.init(red: 0.0, green: 0.0, blue: 0.0, alpha: 1)
+        textField.layer.borderColor = UIColor.black.cgColor
+        textField.layer.cornerRadius = 10
         return textField
     }()
     
@@ -47,7 +49,6 @@ class SearchViewController: UIViewController {
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .lightGray
         button.layer.cornerRadius = 10
-        button.isEnabled = false
         button.layer.borderWidth = 1
         button.layer.borderColor = CGColor.init(red: 1.0, green: 1.0, blue: 1.0, alpha: 1)
         return button
@@ -62,10 +63,17 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setNavigationTitle("GitHub")
         setupViews()
         setConstraints()
         setSubscribers()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNavigationTitle("GitHub")
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        setNavigationTitle("")
     }
 }
 
@@ -78,6 +86,7 @@ extension SearchViewController {
     func setupViews() {
         view.backgroundColor = .white
         view.addSubviews([logoImage, searchTextField, searchButton, filterView])
+        viewModel.viewControllerDelegate = self
         searchTextField.addTarget(self, action: #selector(searchTextFieldDidChange), for: .allEditingEvents)
         searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
         filterView.icon.addTarget(self, action: #selector(filterViewTapped), for: .touchUpInside)
@@ -89,22 +98,24 @@ extension SearchViewController {
             .sink { [unowned self] (amount) in self.filterView.iconText.text = "\(amount)" }
             .store(in: &disposeBag)
     }
-    @objc func searchTextFieldDidChange() {
-        if let text = searchTextField.text,
-           text.count >= 2 {
+    @objc func searchTextFieldDidChange() { viewModel.searchTextChanged(searchTextField.text) }
+    @objc func searchButtonTapped() { viewModel.searchButtonTapped(for: searchTextField.text) }
+    @objc func filterViewTapped() { viewModel.filterButtonTapped(on: self) }
+    
+    func enableSearch(_ should: Bool) {
+        if should {
             searchButton.layer.borderColor = CGColor.init(red: 0.0, green: 0.0, blue: 0.0, alpha: 1)
             searchButton.isEnabled = true
             searchButton.backgroundColor = .white
-            searchTextField.rightView?.tintColor = .black
-        } else {
+            searchButton.addShadow(color: .black)
+        }
+        else {
             searchButton.layer.borderColor = CGColor.init(red: 1.0, green: 1.0, blue: 1.0, alpha: 1)
             searchButton.isEnabled = false
             searchButton.backgroundColor = .lightGray
-            searchTextField.rightView?.tintColor = .darkGray
+            searchButton.removeShadow()
         }
     }
-    @objc func searchButtonTapped() { if let text = searchTextField.text { viewModel.searchButtonTapped(for: text) } }
-    @objc func filterViewTapped() { viewModel.filterButtonTapped(on: self) }
 }
 
 extension SearchViewController {
@@ -124,7 +135,7 @@ extension SearchViewController {
     func setConstaraintsLogoImage() {
         logoImage.snp.makeConstraints { (make) in
             make.centerX.equalTo(view)
-            make.height.width.equalTo(250)
+            make.height.width.equalTo(230)
             make.bottom.equalTo(searchTextField.snp.top).offset(-50)
         }
     }
